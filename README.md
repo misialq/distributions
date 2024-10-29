@@ -79,6 +79,10 @@ $ docker login quay.io
 # Then push both latest and version builds up:
 $ docker push quay.io/qiime2/DISTRO:latest
 $ docker push quay.io/qiime2/DISTRO:20XX.REL
+# Build the workshop docker image locally
+$ make docker-workshop
+# Then push the version build up:
+$ docker push quay.io/qiime2/DISTRO-workshop:20XX.REL
 # LOGOUT
 $ docker logout quay.io
 ```
