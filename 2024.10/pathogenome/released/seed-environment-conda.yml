@@ -21,6 +21,7 @@ dependencies:
 - q2-feature-classifier=2024.10.0
 - q2-feature-table=2024.10.0
 - q2-longitudinal=2024.10.0
+- q2-metadata=2024.10.0
 - q2-mystery-stew=2024.10.0
 - q2-quality-control=2024.10.0
 - q2-sample-classifier=2024.10.0
