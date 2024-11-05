@@ -134,11 +134,16 @@ jobs:
           path: ${{ env.plugin_path }}
           fetch-depth: 0
 
+      - uses: qiime2/action-library-packaging/environment@beta
+        if: ${{ !steps.fetch-build.outputs.cache-hit }}
+        name: 'Set up build environment'
+        id: setup-conda
+
       - uses: qiime2/action-library-packaging/build-package@beta
         name: 'Determine package data for ${{ matrix.package }}'
         id: get-package-data
         with:
-          conda-activate: ''
+          conda-activate: ${{ steps.setup-conda.outputs.conda-activate }}
           recipe-path: ${{ env.plugin_path }}/ci/recipe/
           conda-build-config: ${{ steps.make-cbc.outputs.conda-build-config }}
           channels: ${{ steps.make-cbc.outputs.channels }}
@@ -151,11 +156,6 @@ jobs:
         with:
           key: "[Conda Package] ${{ steps.get-package-data.outputs.package-name }}=${{ steps.get-package-data.outputs.package-version }} (${{ matrix.os }}) (${{ hashFiles(format('{0}/seed-environment-conda.yml', env.seed_environment_path)) }})"
           path: ${{ env.rebuilt_channel_path }}/*/${{ steps.get-package-data.outputs.package-name}}-${{ steps.get-package-data.outputs.package-version}}-*
-
-      - uses: qiime2/action-library-packaging/environment@beta
-        if: ${{ !steps.fetch-build.outputs.cache-hit }}
-        name: 'Set up build environment'
-        id: setup-conda
 
       - uses: qiime2/action-library-packaging/make-conda-config@beta
         if: ${{ !steps.fetch-build.outputs.cache-hit }}
