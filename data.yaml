@@ -4,7 +4,7 @@ released_epoch: "2024.10"
 active_epoch: "2025.4"
 # this is the next dev cycle epoch (i.e. 20XX.REL+2)
 next_epoch: "2025.10"
-distros: [tiny, amplicon, metagenome, pathogenome]
+distros: [tiny, amplicon, metagenome, pathogenome, test]
 packages:
 
 - name: q2-alignment
@@ -137,7 +137,7 @@ packages:
 
 - name: q2templates
   repo: qiime2/q2templates
-  distros: [tiny, amplicon, metagenome, pathogenome]
+  distros: [tiny, amplicon, metagenome, pathogenome, test]
 
 - name: qiime2
   repo: qiime2/qiime2
