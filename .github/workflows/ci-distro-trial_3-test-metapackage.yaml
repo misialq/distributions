@@ -87,11 +87,11 @@ jobs:
           conda-prefix: './test-env'
           environment-file: ${{ env.solved_environment_path }}/${{ inputs.distro-name }}-${{ matrix.os == 'ubuntu-latest' && matrix.os || 'macos-latest' }}-conda.yml
 
-      - name: run qiime info
-        shell: bash
-        run: |
-          ${{ steps.env.outputs.conda-activate }}
-          qiime info
+      # - name: run qiime info
+      #   shell: bash
+      #   run: |
+      #     ${{ steps.env.outputs.conda-activate }}
+      #     qiime info
 
       - name: 'collect package path'
         id: 'collect-package'
