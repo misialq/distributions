@@ -31,8 +31,6 @@ on:
         value: ${{ jobs.prepare.outputs.repodata-patches-key }}
 
 env:
-  run_id: ${{ github.run_id }}
-
   base_branch: 'dev'
 
   matrix_key: '[GHA Matrix] Packages to rebuild and test'
@@ -229,13 +227,13 @@ jobs:
       - name: upload reverse dependencies
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.rev_deps_key }}-${{ env.run_id }}
+          name: ${{ env.rev_deps_key }}
           path: ${{ env.rev_deps_path }}
 
       - name: upload patched channel
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.patched-channel-restore.outputs.cache-primary-key }}-${{ env.run_id }}
+          name: ${{ steps.patched-channel-restore.outputs.cache-primary-key }}
           path: ${{ env.patched_channel_path }}
 
       - uses: actions/cache/save@v3
@@ -248,7 +246,7 @@ jobs:
       - name: store matrices
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.matrix_key }}-${{ env.run_id }}
+          name: ${{ env.matrix_key }}
           path: ${{ env.matrix_path }}
 
       - name: store generations
@@ -276,7 +274,7 @@ jobs:
         if: ${{ needs.detect-vars.outputs.is-rebuild != 'true' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.repodata_patches_key }}-${{ env.run_id }}
+          name: ${{ env.repodata_patches_key }}
           path: ${{ env.repodata_patches_path }}
 
       - name: create rebuilt channel
@@ -288,7 +286,7 @@ jobs:
       - name: store rebuilt channel
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.rebuilt_channel_key }}-${{ env.run_id }}
+          name: ${{ env.rebuilt_channel_key }}-${{ github.run_id }}
           path: ${{ env.rebuilt_channel_path }}
 
       - name: create seed env dir
@@ -300,5 +298,6 @@ jobs:
       - name: store seed env
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.seed_environment_key }}-${{ env.run_id }}
+          name: ${{ env.seed_environment_key }}
           path: ${{ env.seed_environment_path }}
+          overwrite: true
