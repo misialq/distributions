@@ -190,7 +190,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         name: 'Upload updated build to rebuilt channel'
         with:
-          name: ${{ inputs.rebuilt-channel-key }}-${{ matrix.package }}-${{ matrix.os }}
+          name: ${{ inputs.rebuilt-channel-key }}-${{ steps.get-package-data.outputs.package-name }}-${{ matrix.os }}
           path: ${{ env.rebuilt_channel_path }}/*/${{ steps.get-package-data.outputs.package-name}}-${{ steps.get-package-data.outputs.package-version}}-*
 
       - id: setup-version-info
@@ -203,7 +203,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         name: 'Upload info about package'
         with:
-          name: ${{ env.version_key }}-${{ matrix.package }}-${{ matrix.os }}
+          name: ${{ env.version_key }}-${{ steps.get-package-data.outputs.package-name }}-${{ matrix.os }}
           path: ${{ env.version_path }}
 
 
