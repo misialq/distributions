@@ -51,8 +51,9 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.matrix-key }}
+          pattern: ${{ inputs.matrix-key }}-*
           path: '${{ env.matrix_path }}'
+          merge-multiple: true
 
       - id: set-matrix
         run: |
