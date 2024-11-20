@@ -45,7 +45,7 @@ env:
   repodata_patches_key: '[Repodata Patches] patch_instructions.json'
   repodata_patches_path: './repodata-patches'
 
-  rebuilt_channel_key: '[Conda Channel] Rebuilt packages'
+  rebuilt_channel_key: 'Conda Channel Rebuilt packages'
   rebuilt_channel_path: './rebuilt-channel'
 
   seed_environment_key: '[Environment File] Metapackage seed environment'
