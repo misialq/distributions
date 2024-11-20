@@ -36,9 +36,9 @@ env:
   rev_deps_path: './rev-deps'
   seed_environment_path: './seed-env'
   plugin_path: './plugin'
-  version_key: '|Version Files| Rebuilt version info'
+  version_key: '(Version Files) Rebuilt version info'
   version_path: './version-info'
-  repodata_patches_key: '|Repodata Patches| patch_instructions.json'
+  repodata_patches_key: '(Repodata Patches) patch_instructions.json'
   repodata_patches_path: './repodata-patches'
 
 jobs:

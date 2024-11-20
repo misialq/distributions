@@ -33,25 +33,25 @@ on:
 env:
   base_branch: 'dev'
 
-  matrix_key: '|GHA Matrix| Packages to rebuild and test'
+  matrix_key: '(GHA Matrix) Packages to rebuild and test'
   matrix_path: './matrix'
 
-  partial_patched_channel_key: '|Conda Channel| Mirror with patches' # + (HASH)
+  partial_patched_channel_key: '(Conda Channel) Mirror with patches' # + (HASH)
   patched_channel_path: './patched-channel'
 
-  rev_deps_key: '|Reverse Dependencies| Packages to rebuild and their reverse dependencies'
+  rev_deps_key: '(Reverse Dependencies) Packages to rebuild and their reverse dependencies'
   rev_deps_path: './rev-deps'
 
-  repodata_patches_key: '|Repodata Patches| patch_instructions.json'
+  repodata_patches_key: '(Repodata Patches) patch_instructions.json'
   repodata_patches_path: './repodata-patches'
 
-  rebuilt_channel_key: '|Conda Channel| Rebuilt packages'
+  rebuilt_channel_key: '(Conda Channel) Rebuilt packages'
   rebuilt_channel_path: './rebuilt-channel'
 
-  seed_environment_key: '|Environment File| Metapackage seed environment'
+  seed_environment_key: '(Environment File) Metapackage seed environment'
   seed_environment_path: './seed-env'
 
-  solved_environment_key: '|Environment File| Metapackage solved environment'
+  solved_environment_key: '(Environment File) Metapackage solved environment'
 
 jobs:
   detect-vars:
