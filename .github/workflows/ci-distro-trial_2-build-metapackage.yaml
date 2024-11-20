@@ -52,19 +52,19 @@ jobs:
         name: "Clean disk on linux"
 
       - name: fetch seed env
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.seed-environment-key }}
           path: ${{ env.seed_environment_path }}
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         name: 'Fetch base channel with patches'
         with:
           name: ${{ inputs.patched-channel-key }}
           path: ${{ env.patched_channel_path }}
 
       - name: fetch rebuilt channel
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.rebuilt-channel-key }}
           path: ${{ env.rebuilt_channel_path }}
@@ -95,13 +95,15 @@ jobs:
           package-version: ${{ needs.setup-version.outputs.version }}
 
       - name: upload rebuilt channel with metapackage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.rebuilt-channel-key }}
           path: ${{ env.rebuilt_channel_path }}
+          overwrite: true
 
       - name: upload environment file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.solved-environment-key }}
           path: ${{ steps.cache-env.outputs.environment-file }}
+          overwrite: true
