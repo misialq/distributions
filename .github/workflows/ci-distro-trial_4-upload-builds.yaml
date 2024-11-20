@@ -45,13 +45,13 @@ jobs:
           path: ${{ env.distributions_repo }}
 
       - name: get seed environment
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.seed-environment-key }}
           path: ${{ env.seed_environment_path }}
 
       - name: get solved environment
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.solved-environment-key }}
           path: ${{ env.solved_environment_path }}

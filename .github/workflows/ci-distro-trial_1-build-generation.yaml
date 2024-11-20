@@ -49,7 +49,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.matrix-key }}
           path: '${{ env.matrix_path }}'
@@ -77,19 +77,19 @@ jobs:
       - shell: bash
         run: pip install pyyaml
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         name: 'Fetch base channel with patches'
         with:
           name: ${{ inputs.patched-channel-key }}
           path: ${{ env.patched_channel_path }}
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         name: 'Fetch rebuilt channel'
         with:
           name: ${{ inputs.rebuilt-channel-key }}
           path: ${{ env.rebuilt_channel_path }}
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         name: 'Fetch seed environment.yml'
         with:
           name: ${{ inputs.seed-environment-key }}
@@ -187,10 +187,10 @@ jobs:
           key: ${{ steps.fetch-build.outputs.cache-primary-key }}
           path: ${{ env.rebuilt_channel_path }}/*/${{ steps.get-package-data.outputs.package-name}}-${{ steps.get-package-data.outputs.package-version}}-*
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         name: 'Upload updated build to rebuilt channel'
         with:
-          name: ${{ inputs.rebuilt-channel-key }}
+          name: ${{ inputs.rebuilt-channel-key }}-${{ matrix.package }}-${{ matrix.os }}
           path: ${{ env.rebuilt_channel_path }}/*/${{ steps.get-package-data.outputs.package-name}}-${{ steps.get-package-data.outputs.package-version}}-*
 
       - id: setup-version-info
@@ -200,10 +200,10 @@ jobs:
           mkdir -p ${{ env.version_path }}
           echo '${{ steps.get-package-data.outputs.package-name }}=${{ steps.get-package-data.outputs.package-version }}' > '${{ env.version_path }}/${{ steps.get-package-data.outputs.package-name }}.txt'
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         name: 'Upload info about package'
         with:
-          name: ${{ env.version_key }}
+          name: ${{ env.version_key }}-${{ matrix.package }}-${{ matrix.os }}
           path: ${{ env.version_path }}
 
 
@@ -213,11 +213,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         name: 'Collate rebuilt channel'
         with:
-          name: ${{ inputs.rebuilt-channel-key }}
+          pattern: ${{ inputs.rebuilt-channel-key }}-*
           path: ${{ env.rebuilt_channel_path }}
+          merge-multiple: true
 
       - name: set up python 3.8
         uses: actions/setup-python@v4
@@ -235,7 +236,7 @@ jobs:
         shell: bash
         run: conda index ${{ env.rebuilt_channel_path }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         name: 'Upload final rebuilt channel'
         with:
           name: ${{ inputs.rebuilt-channel-key }}
@@ -245,17 +246,18 @@ jobs:
             ${{ env.rebuilt_channel_path }}/*channeldata*
             !${{ env.rebuilt_channel_path }}/*/.cache/*
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         name: 'Fetch updated versions'
         with:
-          name: ${{ env.version_key }}
+          pattern: ${{ env.version_key }}-*
           path: ${{ env.version_path }}
+          merge-multiple: true
 
       - name: 'Collated updated versions'
         shell: bash
         run: cat ${{ env.version_path }}/*.txt > version_updates.txt
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         name: 'Fetch seed environment.yml'
         with:
           name: ${{ inputs.seed-environment-key }}
@@ -267,20 +269,20 @@ jobs:
           environment-file: ${{ env.seed_environment_path }}/seed-environment-conda.yml
           versions-file: version_updates.txt
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         name: 'Update seed environment.yml'
         with:
           name: ${{ inputs.seed-environment-key }}
           path: ${{ env.seed_environment_path }}
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         if: ${{ inputs.is-rebuild != 'true' }}
         name: 'Fetch base channel with patches'
         with:
           name: ${{ inputs.patched-channel-key }}
           path: ${{ env.patched_channel_path }}
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         if: ${{ inputs.is-rebuild != 'true' }}
         name: 'Fetch rebuilt packages and their reverse dependencies'
         with:
@@ -313,12 +315,12 @@ jobs:
 
       - name: store repodata patches
         if: ${{ inputs.is-rebuild != 'true' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.repodata_patches_key }}
           path: ${{ env.repodata_patches_path }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ inputs.is-rebuild != 'true' }}
         name: 'Upload base channel with patches'
         with:

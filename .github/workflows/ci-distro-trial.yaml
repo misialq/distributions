@@ -24,7 +24,7 @@ jobs:
       is-rebuild: ${{ needs.prepare.outputs.is-rebuild }}
       rev-deps-key: ${{ needs.prepare.outputs.rev-deps-key }}
       patched-channel-key: ${{ needs.prepare.outputs.patched-channel-key }}
-      rebuilt-channel-key: ${{ needs.prepare.outputs.rebuilt-channel-key }}
+      rebuilt-channel-key: ${{ needs.prepare.outputs.rebuilt-channel-key }}-${{ github.run_id }}
       seed-environment-key: ${{ needs.prepare.outputs.seed-environment-key }}
       matrix-key: ${{ needs.prepare.outputs.matrix-key }}
       sibling-ref: ${{ needs.prepare.outputs.sibling-ref }}

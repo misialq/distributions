@@ -31,6 +31,8 @@ on:
         value: ${{ jobs.prepare.outputs.repodata-patches-key }}
 
 env:
+  run_id: ${{ github.run_id }}
+
   base_branch: 'dev'
 
   matrix_key: '[GHA Matrix] Packages to rebuild and test'
@@ -225,15 +227,15 @@ jobs:
           versions-file: versions.txt
 
       - name: upload reverse dependencies
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.rev_deps_key }}
+          name: ${{ env.rev_deps_key }}-${{ env.run_id }}
           path: ${{ env.rev_deps_path }}
 
       - name: upload patched channel
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.patched-channel-restore.outputs.cache-primary-key }}
+          name: ${{ steps.patched-channel-restore.outputs.cache-primary-key }}-${{ env.run_id }}
           path: ${{ env.patched_channel_path }}
 
       - uses: actions/cache/save@v3
@@ -244,9 +246,9 @@ jobs:
           path: ${{ env.patched_channel_path }}
 
       - name: store matrices
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.matrix_key }}
+          name: ${{ env.matrix_key }}-${{ env.run_id }}
           path: ${{ env.matrix_path }}
 
       - name: store generations
@@ -272,9 +274,9 @@ jobs:
 
       - name: store repodata patches
         if: ${{ needs.detect-vars.outputs.is-rebuild != 'true' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.repodata_patches_key }}
+          name: ${{ env.repodata_patches_key }}-${{ env.run_id }}
           path: ${{ env.repodata_patches_path }}
 
       - name: create rebuilt channel
@@ -284,9 +286,9 @@ jobs:
           conda index ${{ env.rebuilt_channel_path }}
 
       - name: store rebuilt channel
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.rebuilt_channel_key }}
+          name: ${{ env.rebuilt_channel_key }}-${{ env.run_id }}
           path: ${{ env.rebuilt_channel_path }}
 
       - name: create seed env dir
@@ -296,7 +298,7 @@ jobs:
           cp ${{ needs.detect-vars.outputs.seed-env }} ${{ env.seed_environment_path }}
 
       - name: store seed env
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.seed_environment_key }}
+          name: ${{ env.seed_environment_key }}-${{ env.run_id }}
           path: ${{ env.seed_environment_path }}
