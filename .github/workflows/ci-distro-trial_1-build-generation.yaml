@@ -86,8 +86,9 @@ jobs:
       - uses: actions/download-artifact@v4
         name: 'Fetch rebuilt channel'
         with:
-          name: ${{ inputs.rebuilt-channel-key }}
+          pattern: ${{ inputs.rebuilt-channel-key }}-*
           path: ${{ env.rebuilt_channel_path }}
+          merge-multiple: true
 
       - uses: actions/download-artifact@v4
         name: 'Fetch seed environment.yml'
