@@ -242,10 +242,9 @@ jobs:
         with:
           name: ${{ inputs.rebuilt-channel-key }}
           path: |
-            ${{ env.rebuilt_channel_path }}/**/*repodata*
-            ${{ env.rebuilt_channel_path }}/**/*index*
-            ${{ env.rebuilt_channel_path }}/*channeldata*
+            ${{ env.rebuilt_channel_path }}/**
             !${{ env.rebuilt_channel_path }}/*/.cache/*
+          overwrite: true
 
       - uses: actions/download-artifact@v4
         name: 'Fetch updated versions'
