@@ -53,8 +53,9 @@ jobs:
       - name: get solved environment
         uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.solved-environment-key }}
+          pattern: ${{ inputs.solved-environment-key }}-*
           path: ${{ env.solved_environment_path }}
+          merge-multiple: true
 
       - name: prep directories
         shell: bash

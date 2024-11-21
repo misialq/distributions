@@ -155,7 +155,7 @@ jobs:
         name: 'Try to fetch an existing build'
         id: fetch-build
         with:
-          key: "[Conda Package] ${{ steps.get-package-data.outputs.package-name }}=${{ steps.get-package-data.outputs.package-version }} (${{ matrix.os }}) (${{ hashFiles(format('{0}/seed-environment-conda.yml', env.seed_environment_path)) }})"
+          key: "(Conda Package) ${{ steps.get-package-data.outputs.package-name }}=${{ steps.get-package-data.outputs.package-version }} (${{ matrix.os }}) (${{ hashFiles(format('{0}/seed-environment-conda.yml', env.seed_environment_path)) }})"
           path: ${{ env.rebuilt_channel_path }}/*/${{ steps.get-package-data.outputs.package-name}}-${{ steps.get-package-data.outputs.package-version}}-*
 
       - uses: qiime2/action-library-packaging/make-conda-config@beta
@@ -192,7 +192,7 @@ jobs:
         name: 'Upload updated build to rebuilt channel'
         with:
           name: ${{ inputs.rebuilt-channel-key }}-${{ steps.get-package-data.outputs.package-name }}-${{ matrix.os }}
-          path: ${{ env.rebuilt_channel_path }}/*/${{ steps.get-package-data.outputs.package-name}}-${{ steps.get-package-data.outputs.package-version}}-*
+          path: ${{ env.rebuilt_channel_path }}/*/${{ steps.get-package-data.outputs.package-name }}-${{ steps.get-package-data.outputs.package-version }}-*
 
       - id: setup-version-info
         name: 'Capture info about package'
@@ -320,6 +320,7 @@ jobs:
         with:
           name: ${{ env.repodata_patches_key }}
           path: ${{ env.repodata_patches_path }}
+          overwrite: true
 
       - uses: actions/upload-artifact@v4
         if: ${{ inputs.is-rebuild != 'true' }}
@@ -327,3 +328,4 @@ jobs:
         with:
           name: ${{ inputs.patched-channel-key }}
           path: ${{ env.patched_channel_path }}
+          overwrite: true

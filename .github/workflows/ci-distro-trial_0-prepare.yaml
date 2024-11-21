@@ -277,18 +277,6 @@ jobs:
           name: ${{ env.repodata_patches_key }}
           path: ${{ env.repodata_patches_path }}
 
-      - name: create rebuilt channel
-        id: rebuilt-channel
-        run: |
-          mkdir ${{ env.rebuilt_channel_path }}
-          conda index ${{ env.rebuilt_channel_path }}
-
-      - name: store rebuilt channel
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.rebuilt_channel_key }}-${{ github.run_id }}
-          path: ${{ env.rebuilt_channel_path }}
-
       - name: create seed env dir
         id: seed-env-dir
         run: |
