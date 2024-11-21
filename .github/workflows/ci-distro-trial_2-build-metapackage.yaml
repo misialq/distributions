@@ -104,6 +104,5 @@ jobs:
       - name: upload environment file
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.solved-environment-key }}
+          name: ${{ inputs.solved-environment-key }}-${{ matrix.os }}
           path: ${{ steps.cache-env.outputs.environment-file }}
-          overwrite: true
