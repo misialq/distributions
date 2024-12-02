@@ -25,7 +25,7 @@ RUN conda env create -n qiime2-${DISTRO}-${EPOCH} --file released-env.yml \
  && rm released-env.yml
 
 RUN /bin/bash -c "source activate qiime2-${DISTRO}-${EPOCH}"
-ENV CONDA_PREFIX /home/qiime2/.conda/qiime2-${DISTRO}-${EPOCH}/
+ENV CONDA_PREFIX /opt/conda/envs/qiime2-${DISTRO}-${EPOCH}/
 RUN qiime dev refresh-cache
 RUN echo "source activate qiime2-${DISTRO}-${EPOCH}" >> $HOME/.bashrc
 RUN echo "source tab-qiime" >> $HOME/.bashrc
