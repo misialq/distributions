@@ -13,7 +13,6 @@ jobs:
 
   amplicon:
     needs: [tiny]
-    if: always()
     uses: ./.github/workflows/create-prepare-pr.yaml
     secrets: inherit
     with:
