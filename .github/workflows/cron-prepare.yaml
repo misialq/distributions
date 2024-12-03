@@ -19,7 +19,7 @@ jobs:
       distro: amplicon
 
   metagenome:
-    needs: [amplicon]
+    needs: [tiny, amplicon]
     if: ${{ always() && !cancelled() && !contains(needs.tiny.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
     uses: ./.github/workflows/create-prepare-pr.yaml
     secrets: inherit
@@ -27,7 +27,7 @@ jobs:
       distro: metagenome
 
   pathogenome:
-    needs: [metagenome]
+    needs: [tiny, amplicon, metagenome]
     if: ${{ always() && !cancelled() && !contains(needs.tiny.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
     uses: ./.github/workflows/create-prepare-pr.yaml
     secrets: inherit
