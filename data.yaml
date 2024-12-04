@@ -9,7 +9,7 @@ packages:
 
 - name: q2-alignment
   repo: qiime2/q2-alignment
-  distros: [amplicon]
+  distros: [amplicon, metagenome, pathogenome]
 
 - name: q2-amrfinderplus
   repo: bokulich-lab/q2-amrfinderplus
