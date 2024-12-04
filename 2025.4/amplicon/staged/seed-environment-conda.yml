@@ -46,7 +46,7 @@ dependencies:
 - qiime2=2025.4.0.dev0+4.ge8e66ba
 - r-base=4.3.3
 - r-reticulate=1.36.0
-- rescript=2025.4.0.dev0+1.g83c9c15
+- rescript=2025.4.0.dev0+2.g16a48fa
 - scikit-bio=0.6.0
 - scikit-learn=1.4.2
 - scipy=1.13.0
