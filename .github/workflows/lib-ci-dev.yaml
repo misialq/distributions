@@ -75,16 +75,16 @@ jobs:
       seed_env_path: ${{ needs.setup.outputs.active-epoch }}/${{ inputs.distro }}/staged/seed-environment-conda.yml
       env_prefix: ./test-env
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        id: checkout-repo
         with:
           path: ${{ env.plugin_path }}
           fetch-depth: 0
 
-      - name: 'Store repo checkout commit in GH env'
-        run: echo 'GH_CHECKOUT_COMMIT=$GITHUB_SHA' >> $GITHUB_ENV
-
-      - name: 'list vars in GH env'
-        run: echo '$GITHUB_ENV'
+      - name: 'echo ${{ github.event.repository.name }} checkout SHA'
+        shell: bash
+        run: |
+          echo '${{ steps.checkout-repo.outputs.commit }}'
 
       - uses: actions/checkout@v3
         with:
