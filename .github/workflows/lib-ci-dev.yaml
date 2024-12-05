@@ -81,10 +81,11 @@ jobs:
           path: ${{ env.plugin_path }}
           fetch-depth: 0
 
-      - name: 'echo ${{ github.event.repository.name }} checkout SHA'
+      - name: 'store ${{ github.event.repository.name }} checkout SHA'
         shell: bash
         run: |
-          echo '${{ steps.checkout-repo.outputs.commit }}'
+          gha_repo_sha=${{ steps.checkout-repo.outputs.commit }}
+          echo 'GH_REPO_SHA=$gh_repo_sha' >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
