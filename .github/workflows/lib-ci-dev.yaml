@@ -76,15 +76,15 @@ jobs:
       env_prefix: ./test-env
     steps:
       - uses: actions/checkout@v3
-        id: checkout-repo
         with:
           path: ${{ env.plugin_path }}
           fetch-depth: 0
 
-      - name: 'echo ${{ github.event.repository.name }} checkout SHA'
-        shell: bash
-        run: |
-          echo '${{ steps.checkout-repo.outputs.commit }}'
+      - name: 'Store repo checkout commit in GH env'
+        run: echo 'GH_CHECKOUT_COMMIT=${GITHUB_SHA}' >> $GITHUB_ENV
+
+      - name: 'list vars in GH env'
+        run: echo '$GITHUB_ENV'
 
       - uses: actions/checkout@v3
         with:
