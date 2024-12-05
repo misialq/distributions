@@ -84,8 +84,8 @@ jobs:
       - name: 'store ${{ github.event.repository.name }} checkout SHA'
         shell: bash
         run: |
-          gha_repo_sha=${{ steps.checkout-repo.outputs.commit }}
-          echo GH_REPO_SHA='$gh_repo_sha' >> $GITHUB_ENV
+          gh_repo_sha=${{ steps.checkout-repo.outputs.commit }}
+          echo "GH_REPO_SHA=$gh_repo_sha" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
