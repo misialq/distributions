@@ -81,7 +81,7 @@ jobs:
           fetch-depth: 0
 
       - name: 'Store repo checkout commit in GH env'
-        run: echo 'GH_CHECKOUT_COMMIT=${GITHUB_SHA}' >> $GITHUB_ENV
+        run: echo 'GH_CHECKOUT_COMMIT=$GITHUB_SHA' >> $GITHUB_ENV
 
       - name: 'list vars in GH env'
         run: echo '$GITHUB_ENV'
