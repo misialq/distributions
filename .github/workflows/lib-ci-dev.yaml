@@ -84,7 +84,7 @@ jobs:
       - name: 'echo ${{ github.event.repository.name }} checkout SHA'
         shell: bash
         run: |
-          echo ${{ steps.checkout-repo.outputs.commit }}
+          echo '${{ steps.checkout-repo.outputs.commit }}'
 
       - uses: actions/checkout@v3
         with:
