@@ -6,7 +6,7 @@ dependencies:
 - _libgcc_mutex=0.1
 - _openmp_mutex=4.5
 - _r-mutex=1.0.1
-- anyio=4.6.2.post1
+- anyio=4.7.0
 - appdirs=1.4.4
 - argon2-cffi=23.1.0
 - argon2-cffi-bindings=21.2.0
@@ -59,7 +59,7 @@ dependencies:
 - fribidi=1.0.10
 - gcc_impl_linux-64=14.2.0
 - gfortran_impl_linux-64=14.2.0
-- globus-sdk=3.48.0
+- globus-sdk=3.49.0
 - graphite2=1.3.13
 - gxx_impl_linux-64=14.2.0
 - h2=4.1.0
@@ -120,6 +120,8 @@ dependencies:
 - libjpeg-turbo=3.0.0
 - liblapack=3.9.0
 - liblapacke=3.9.0
+- liblzma=5.6.3
+- liblzma-devel=5.6.3
 - libnghttp2=1.58.0
 - libnsl=2.0.1
 - libopenblas=0.3.28
@@ -141,7 +143,7 @@ dependencies:
 - libzlib=1.2.13
 - lxml=5.2.2
 - lz4=4.3.3
-- lz4-c=1.9.4
+- lz4-c=1.10.0
 - make=4.4.1
 - markupsafe=3.0.2
 - matplotlib-inline=0.1.7
@@ -175,7 +177,7 @@ dependencies:
 - pkgutil-resolve-name=1.3.10
 - platformdirs=4.3.6
 - pluggy=1.5.0
-- prometheus_client=0.21.0
+- prometheus_client=0.21.1
 - prompt-toolkit=3.0.48
 - psutil=6.1.0
 - pthread-stubs=0.4
@@ -222,7 +224,7 @@ dependencies:
 - requests=2.32.3
 - rfc3339-validator=0.1.4
 - rfc3986-validator=0.1.1
-- rpds-py=0.22.0
+- rpds-py=0.22.3
 - samtools=1.21
 - scikit-bio=0.6.0
 - scikit-learn=1.4.2
@@ -231,10 +233,10 @@ dependencies:
 - send2trash=1.8.3
 - setproctitle=1.3.4
 - setuptools=75.6.0
-- six=1.16.0
+- six=1.17.0
 - sniffio=1.3.1
 - soupsieve=2.5
-- stack_data=0.6.2
+- stack_data=0.6.3
 - sysroot_linux-64=2.17
 - tblib=3.0.0
 - terminado=0.18.1
@@ -247,7 +249,7 @@ dependencies:
 - tornado=6.4.2
 - traitlets=5.9.0
 - typeguard=4.4.1
-- types-python-dateutil=2.9.0.20241003
+- types-python-dateutil=2.9.0.20241206
 - typing-extensions=4.12.2
 - typing_extensions=4.12.2
 - typing_utils=0.1.0
@@ -258,7 +260,7 @@ dependencies:
 - uri-template=1.3.0
 - urllib3=2.2.3
 - wcwidth=0.2.13
-- webcolors=24.8.0
+- webcolors=24.11.1
 - webencodings=0.5.1
 - websocket-client=1.8.0
 - wheel=0.45.1
@@ -274,7 +276,9 @@ dependencies:
 - xorg-renderproto=0.11.1
 - xorg-xextproto=7.3.0
 - xorg-xproto=7.0.31
-- xz=5.2.6
+- xz=5.6.3
+- xz-gpl-tools=5.6.3
+- xz-tools=5.6.3
 - yaml=0.2.5
 - zeromq=4.3.5
 - zipp=3.21.0
