@@ -93,9 +93,17 @@ jobs:
           path: ./distro
           sparse-checkout: ${{ env.seed_env_path }}
 
+      - name: 'Re-export env vars after checkout'
+        run: |
+          echo "GH_REPO_SHA=$GH_REPO_SHA"
+        env:
+          GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
+
       - uses: qiime2/action-library-packaging/environment@beta
         name: 'Set up build environment'
         id: setup-conda
+        env:
+          GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
 
       - name: 'Set up test environment'
         run: |
