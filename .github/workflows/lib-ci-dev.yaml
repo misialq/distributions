@@ -84,8 +84,15 @@ jobs:
       - name: 'store ${{ github.event.repository.name }} checkout SHA'
         shell: bash
         run: |
-          gh_repo_sha=${{ steps.checkout-repo.outputs.commit }}
-          echo "GH_REPO_SHA=$gh_repo_sha" >> $GITHUB_ENV
+          GH_REPO_SHA=${{ steps.checkout-repo.outputs.commit }}
+          echo "GH_REPO_SHA=$GH_REPO_SHA" >> $GITHUB_ENV
+
+      - name: 'Get ${{ github.event.repository.name }} plugin version'
+        id: get-version
+        run: |
+          cd ${{ env.plugin_path }}
+          PLUGIN_VERSION=$(python -m versioningit)
+          echo "PLUGIN_VERSION=$PLUGIN_VERSION" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
@@ -96,14 +103,17 @@ jobs:
       - name: 'Re-export env vars after checkout'
         run: |
           echo "GH_REPO_SHA=$GH_REPO_SHA"
+          echo "PLUGIN_VERSION=$PLUGIN_VERSION"
         env:
           GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
+          PLUGIN_VERSION: ${{ env.PLUGIN_VERSION }}
 
       - uses: qiime2/action-library-packaging/environment@beta
         name: 'Set up build environment'
         id: setup-conda
         env:
           GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
+          PLUGIN_VERSION: ${{ env.PLUGIN_VERSION }}
 
       - name: 'Set up test environment'
         run: |
@@ -141,6 +151,7 @@ jobs:
           output-channel: ${{ env.built_channel_path }}
         env:
           GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
+          PLUGIN_VERSION: ${{ env.PLUGIN_VERSION }}
 
       - uses: qiime2/action-library-packaging/install-package@beta
         name: 'Install ${{ github.event.repository.name }}'
