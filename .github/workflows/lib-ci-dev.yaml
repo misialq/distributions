@@ -81,12 +81,6 @@ jobs:
           path: ${{ env.plugin_path }}
           fetch-depth: 0
 
-      - name: 'store ${{ github.event.repository.name }} checkout SHA'
-        shell: bash
-        run: |
-          GH_REPO_SHA=${{ steps.checkout-repo.outputs.commit }}
-          echo "GH_REPO_SHA=$GH_REPO_SHA" >> $GITHUB_ENV
-
       - name: 'Set up Python'
         uses: actions/setup-python@v4
         with:
@@ -97,12 +91,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install versioningit
 
-      - name: 'Get ${{ github.event.repository.name }} plugin version'
+      - name: 'Get plugin version and inject into pyproject.toml'
         id: get-version
         run: |
           cd ${{ env.plugin_path }}
           PLUGIN_VERSION=$(python -m versioningit)
           echo "PLUGIN_VERSION=$PLUGIN_VERSION" >> $GITHUB_ENV
+          sed -i "s/dynamic = \['version'\]/version = \"$PLUGIN_VERSION\"/" pyproject.toml
+          cat pyproject.toml
+
+      - name: 'store ${{ github.event.repository.name }} checkout SHA'
+        shell: bash
+        run: |
+          GH_REPO_SHA=${{ steps.checkout-repo.outputs.commit }}
+          echo "GH_REPO_SHA=$GH_REPO_SHA" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
