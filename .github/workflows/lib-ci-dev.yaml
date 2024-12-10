@@ -139,6 +139,7 @@ jobs:
           conda-build-config: ${{ steps.make-cbc.outputs.conda-build-config }}
           channels: ${{ steps.make-cbc.outputs.channels }}
           output-channel: ${{ env.built_channel_path }}
+        env: ${{ env.GH_REPO_SHA }}
 
       - uses: qiime2/action-library-packaging/install-package@beta
         name: 'Install ${{ github.event.repository.name }}'
