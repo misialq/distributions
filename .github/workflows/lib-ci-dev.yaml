@@ -81,60 +81,15 @@ jobs:
           path: ${{ env.plugin_path }}
           fetch-depth: 0
 
-      - name: 'Set up Python'
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8
-
-      - name: 'Install versioningit'
-        run: |
-          python -m pip install --upgrade pip
-          pip install versioningit
-
-      - name: 'Get plugin version and inject into pyproject.toml'
-        # if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: |
-          cd ${{ env.plugin_path }}
-          PLUGIN_VERSION=$(python -m versioningit)
-          echo "PLUGIN_VERSION=$PLUGIN_VERSION" >> $GITHUB_ENV
-      #     sed -i "s/dynamic = \['version'\]/version = \"$PLUGIN_VERSION\"/" pyproject.toml
-      #     cat pyproject.toml
-
-      # - name: 'Get plugin version and inject into pyproject.toml (macOS)'
-      #   if: ${{ matrix.os == 'macos-13' }}
-      #   run: |
-      #     cd ${{ env.plugin_path }}
-      #     PLUGIN_VERSION=$(python -m versioningit)
-      #     echo "PLUGIN_VERSION=$PLUGIN_VERSION" >> $GITHUB_ENV
-      #     sed -i '' "s/dynamic = \['version'\]/version = \"$PLUGIN_VERSION\"/" pyproject.toml
-      #     cat pyproject.toml
-
-      - name: 'store ${{ github.event.repository.name }} checkout SHA'
-        shell: bash
-        run: |
-          GH_REPO_SHA=${{ steps.checkout-repo.outputs.commit }}
-          echo "GH_REPO_SHA=$GH_REPO_SHA" >> $GITHUB_ENV
-
       - uses: actions/checkout@v3
         with:
           repository: qiime2/distributions
           path: ./distro
           sparse-checkout: ${{ env.seed_env_path }}
 
-      - name: 'Re-export env vars after checkout'
-        run: |
-          echo "GH_REPO_SHA=$GH_REPO_SHA"
-          echo "PLUGIN_VERSION=$PLUGIN_VERSION"
-        env:
-          GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
-          PLUGIN_VERSION: ${{ env.PLUGIN_VERSION }}
-
       - uses: qiime2/action-library-packaging/environment@beta
         name: 'Set up build environment'
         id: setup-conda
-        env:
-          GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
-          PLUGIN_VERSION: ${{ env.PLUGIN_VERSION }}
 
       - name: 'Set up test environment'
         run: |
@@ -170,9 +125,6 @@ jobs:
           conda-build-config: ${{ steps.make-cbc.outputs.conda-build-config }}
           channels: ${{ steps.make-cbc.outputs.channels }}
           output-channel: ${{ env.built_channel_path }}
-        env:
-          GH_REPO_SHA: ${{ env.GH_REPO_SHA }}
-          PLUGIN_VERSION: ${{ env.PLUGIN_VERSION }}
 
       - uses: qiime2/action-library-packaging/install-package@beta
         name: 'Install ${{ github.event.repository.name }}'
