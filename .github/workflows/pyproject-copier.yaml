@@ -34,7 +34,7 @@ jobs:
 
       - name: 'Construct and export env vars from setup.py'
         run: |
-          cd ./repo &&
+          echo $(pwd)
           PROJECT_NAME=$(grep -oP 'name\s*=\s*"\K[^"]+' setup.py)
           PROJECT_AUTHOR_NAME=$(grep -oP 'author\s*=\s*"\K[^"]+' setup.py)
           PROJECT_AUTHOR_EMAIL=$(grep -oP 'author_email\s*=\s*"\K[^"]+' setup.py)
