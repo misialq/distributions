@@ -24,9 +24,6 @@ jobs:
 
       - name: 'Construct env vars from action inputs and export'
         run: |
-          pwd &&
-          ls -al &&
-          ls -al repo &&
           PLUGIN_NAME=$(echo "${{ env.plugin_name }}" | sed 's/-/_/g')
           MODULE_NAME=$(echo "$PLUGIN_NAME" | sed 's/^q2_//')
           PROJECT_URLS_REPOSITORY=${{ env.repo_url }}
@@ -53,7 +50,6 @@ jobs:
 
       - name: 'Remove old setup files & relocate recipe file and check status'
         run: |
-          cd ./repo &&
           rm MANIFEST.in setup.cfg setup.py versioneer.py $PLUGIN_NAME/_version.py &&
           mv ci/recipe/meta.yaml conda-recipe/meta.yaml &&
           git status && git diff
