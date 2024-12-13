@@ -24,6 +24,9 @@ jobs:
 
       - name: 'Construct env vars from action inputs and export'
         run: |
+          pwd &&
+          ls -al &&
+          ls -al repo &&
           PLUGIN_NAME=$(echo "${{ env.plugin_name }}" | sed 's/-/_/g')
           MODULE_NAME=$(echo "$PLUGIN_NAME" | sed 's/^q2_//')
           PROJECT_URLS_REPOSITORY=${{ env.repo_url }}
@@ -34,13 +37,12 @@ jobs:
 
       - name: 'Construct and export env vars from setup.py'
         run: |
-          echo $(pwd)
-          PROJECT_NAME=$(grep -oP 'name\s*=\s*"\K[^"]+' setup.py)
-          PROJECT_AUTHOR_NAME=$(grep -oP 'author\s*=\s*"\K[^"]+' setup.py)
-          PROJECT_AUTHOR_EMAIL=$(grep -oP 'author_email\s*=\s*"\K[^"]+' setup.py)
-          PROJECT_DESCRIPTION=$(grep -oP 'description\s*=\s*"\K[^"]+' setup.py)
-          PROJECT_URLS_HOMEPAGE=$(grep -oP 'url\s*=\s*"\K[^"]+' setup.py)
-          PROJECT_LICENSE_TYPE=$(grep -oP 'license\s*=\s*"\K[^"]+' setup.py)
+          PROJECT_NAME=$(grep -oP 'name\s*=\s*"\K[^"]+' setup.py || true)
+          PROJECT_AUTHOR_NAME=$(grep -oP 'author\s*=\s*"\K[^"]+' setup.py || true)
+          PROJECT_AUTHOR_EMAIL=$(grep -oP 'author_email\s*=\s*"\K[^"]+' setup.py || true)
+          PROJECT_DESCRIPTION=$(grep -oP 'description\s*=\s*"\K[^"]+' setup.py || true)
+          PROJECT_URLS_HOMEPAGE=$(grep -oP 'url\s*=\s*"\K[^"]+' setup.py || true)
+          PROJECT_LICENSE_TYPE=$(grep -oP 'license\s*=\s*"\K[^"]+' setup.py || true)
 
           echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
           echo "PROJECT_AUTHOR_NAME=$PROJECT_AUTHOR_NAME" >> $GITHUB_ENV
