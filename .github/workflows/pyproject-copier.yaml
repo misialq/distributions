@@ -1,0 +1,56 @@
+name: pyproject-toml-copier
+on:
+  workflow_dispatch:
+    inputs:
+      plugin:
+        required: true
+        type: string
+      gh-org:
+        required: false
+        type: string
+        default: qiime2
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    env:
+      plugin_name: ${{ inputs.plugin }}
+      repository: ${{ inputs.gh-org }}/${{ inputs.plugin }}
+      repo_url: 'https://github.com/${{ env.repository }}'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.repository }}
+
+      - name: 'Construct env vars from action inputs and export'
+        run: |
+          PLUGIN_NAME=$(echo "${{ env.plugin_name }}" | sed 's/-/_/g')
+          MODULE_NAME=$(echo "$PLUGIN_NAME" | sed 's/^q2_//')
+          PROJECT_URLS_REPOSITORY=${{ env.repo_url }}
+
+          echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV
+          echo "MODULE_NAME=$MODULE_NAME" >> $GITHUB_ENV
+          echo "PROJECT_URLS_REPOSITORY=$PROJECT_URLS_REPOSITORY" >> $GITHUB_ENV
+
+      - name: 'Construct and export env vars from setup.py'
+        run: |
+          PROJECT_NAME=$(grep -oP 'name\s*=\s*"\K[^"]+' setup.py)
+          PROJECT_AUTHOR_NAME=$(grep -oP 'author\s*=\s*"\K[^"]+' setup.py)
+          PROJECT_AUTHOR_EMAIL=$(grep -oP 'author_email\s*=\s*"\K[^"]+' setup.py)
+          PROJECT_DESCRIPTION=$(grep -oP 'description\s*=\s*"\K[^"]+' setup.py)
+          PROJECT_URLS_HOMEPAGE=$(grep -oP 'url\s*=\s*"\K[^"]+' setup.py)
+          PROJECT_LICENSE_TYPE=$(grep -oP 'license\s*=\s*"\K[^"]+' setup.py)
+
+          echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
+          echo "PROJECT_AUTHOR_NAME=$PROJECT_AUTHOR_NAME" >> $GITHUB_ENV
+          echo "PROJECT_AUTHOR_EMAIL=$PROJECT_AUTHOR_EMAIL" >> $GITHUB_ENV
+          echo "PROJECT_DESCRIPTION=$PROJECT_DESCRIPTION" >> $GITHUB_ENV
+          echo "PROJECT_URLS_HOMEPAGE=$PROJECT_URLS_HOMEPAGE" >> $GITHUB_ENV
+          echo "PROJECT_LICENSE_TYPE=$PROJECT_LICENSE_TYPE" >> $GITHUB_ENV
+
+      - name: 'Remove old setup files & relocate recipe file and check status'
+        run: |
+          cd ./repo &&
+          rm MANIFEST.in setup.cfg setup.py versioneer.py $PLUGIN_NAME/_version.py &&
+          mv ci/recipe/meta.yaml conda-recipe/meta.yaml &&
+          git status && git diff
