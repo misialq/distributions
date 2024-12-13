@@ -16,7 +16,7 @@ jobs:
     env:
       plugin_name: ${{ inputs.plugin }}
       repository: ${{ inputs.gh-org }}/${{ inputs.plugin }}
-      repo_url: 'https://github.com/${{ env.repository }}'
+      repo_url: https://github.com/${{ inputs.gh-org }}/${{ inputs.plugin }}
     steps:
       - uses: actions/checkout@v4
         with:
