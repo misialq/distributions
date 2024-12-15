@@ -34,7 +34,7 @@ dependencies:
 - q2-moshpit=2025.4.0.dev0+9.gf09a381
 - q2-mystery-stew=2025.4.0.dev0
 - q2-quality-control=2025.4.0.dev0
-- q2-quality-filter=2025.4.0.dev0
+- q2-quality-filter=2025.4.0.dev0+1.g5d1e22f
 - q2-sample-classifier=2025.4.0.dev0
 - q2-sapienns=2025.4.0.dev0
 - q2-sourmash=2025.4.0.dev0
@@ -61,4 +61,3 @@ dependencies:
 extras:
   variant_override:
     qiime2_epoch: '2025.4'
-# modified: 2024-12-15
