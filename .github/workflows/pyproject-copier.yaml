@@ -11,7 +11,7 @@ on:
         default: qiime2
 
 jobs:
-  setup:
+  pyproject-copier:
     runs-on: ubuntu-latest
     env:
       plugin_name: ${{ inputs.plugin }}
@@ -53,5 +53,33 @@ jobs:
         run: |
           rm MANIFEST.in setup.cfg setup.py versioneer.py $PLUGIN_NAME/_version.py &&
           mkdir conda-recipe &&
-          mv ci/recipe/meta.yaml conda-recipe/meta.yaml &&
-          git status && git diff
+          mv ci/recipe/meta.yaml conda-recipe/meta.yaml
+
+      - name: 'Install and run copier'
+        run: |
+          pip install copier
+          copier copy \
+          --data project_name="$PROJECT_NAME" \
+          --data plugin_name="$PLUGIN_NAME" \
+          --data module_name="$MODULE_NAME" \
+          --data project_author_name="$PROJECT_AUTHOR_NAME" \
+          --data project_author_email="$PROJECT_AUTHOR_EMAIL" \
+          --data project_description="$PROJECT_DESCRIPTION" \
+          --data project_urls_homepage="$PROJECT_URLS_HOMEPAGE" \
+          --data project_urls_repository="$PROJECT_URLS_REPOSITORY" \
+          --data project_license_type="$PROJECT_LICENSE_TYPE" \
+          --data project_license_family="$PROJECT_LICENSE_FAMILY" \
+          https://github.com/qiime2/q2-setup-template.git .
+
+      - name: 'Create pull request from copier changes'
+        uses: qiime2/create-pull-request@v5
+        with:
+          token: ${{ secrets. BOT_PAT }}
+          branch: automated/pyproject-toml-update
+          title: "setup.py -> pyproject.toml"
+          body: |
+            Transition from setup.py & friends to pyproject.toml
+          author: "q2d2 <q2d2.noreply@gmail.com>"
+          committer: "q2d2 <q2d2.noreply@gmail.com>"
+          commit-message: |
+            Transition from setup.py & friends to pyproject.toml
