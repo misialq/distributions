@@ -34,14 +34,13 @@ jobs:
 
       - name: 'Construct and export env vars from setup.py'
         run: |
-          cat setup.py
-          PROJECT_NAME=$(grep -oP "author\s*=\s*'\K[^']+" setup.py)
-          echo PROJECT_NAME
-          PROJECT_AUTHOR_NAME=$(grep -oP 'author\s*=\s*"\K[^"]+' setup.py || true)
-          PROJECT_AUTHOR_EMAIL=$(grep -oP 'author_email\s*=\s*"\K[^"]+' setup.py || true)
-          PROJECT_DESCRIPTION=$(grep -oP 'description\s*=\s*"\K[^"]+' setup.py || true)
-          PROJECT_URLS_HOMEPAGE=$(grep -oP 'url\s*=\s*"\K[^"]+' setup.py || true)
-          PROJECT_LICENSE_TYPE=$(grep -oP 'license\s*=\s*"\K[^"]+' setup.py || true)
+          PROJECT_NAME=$(grep -oP "name\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_AUTHOR_NAME=$(grep -oP "author\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_AUTHOR_EMAIL=$(grep -oP "author_email\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_DESCRIPTION=$(grep -oP "description\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_URLS_HOMEPAGE=$(grep -oP "url\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_LICENSE_TYPE=$(grep -oP "license\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_LICENSE_FAMILY=$(grep -oP "license_family\s*=\s*'\K[^']+" ci/recipe/meta.yaml || true)
 
           echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
           echo "PROJECT_AUTHOR_NAME=$PROJECT_AUTHOR_NAME" >> $GITHUB_ENV
