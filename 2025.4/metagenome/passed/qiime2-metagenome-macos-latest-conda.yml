@@ -98,8 +98,8 @@ dependencies:
 - bwa=0.7.18
 - bwidget=1.10.1
 - bzip2=1.0.8
-- c-ares=1.34.3
-- ca-certificates=2024.8.30
+- c-ares=1.34.4
+- ca-certificates=2024.12.14
 - cached-property=1.5.2
 - cached_property=1.5.2
 - cachetools=4.2.4
@@ -128,10 +128,10 @@ dependencies:
 - contourpy=1.3.1
 - cryptography=44.0.0
 - curl=8.8.0
-- cutadapt=4.9
+- cutadapt=5.0
 - cycler=0.12.1
 - cython=3.0.11
-- debugpy=1.8.10
+- debugpy=1.8.11
 - decorator=4.4.2
 - defusedxml=0.7.1
 - dendropy=5.0.1
@@ -320,7 +320,7 @@ dependencies:
 - muscle=3.8.1551
 - mypy_extensions=1.0.0
 - mysql-connector-c=6.1.11
-- narwhals=1.17.0
+- narwhals=1.18.3
 - natsort=8.4.0
 - nbclassic=1.1.0
 - nbclient=0.10.1
@@ -487,7 +487,7 @@ dependencies:
 - q2-moshpit=2025.4.0.dev0+9.gf09a381
 - q2-mystery-stew=2025.4.0.dev0
 - q2-quality-control=2025.4.0.dev0
-- q2-quality-filter=2025.4.0.dev0
+- q2-quality-filter=2025.4.0.dev0+1.g5d1e22f
 - q2-sample-classifier=2025.4.0.dev0
 - q2-sapienns=2025.4.0.dev0
 - q2-sourmash=2025.4.0.dev0
@@ -527,7 +527,7 @@ dependencies:
 - r-class=7.3_22
 - r-cli=3.6.3
 - r-clipr=0.8.0
-- r-cluster=2.1.7
+- r-cluster=2.1.8
 - r-codetools=0.2_20
 - r-colorspace=2.1_1
 - r-conflicted=1.2.0
@@ -822,7 +822,7 @@ dependencies:
 - xlsxwriter=3.2.0
 - xmltodict=0.14.2
 - xopen=2.0.2
-- xorg-libxau=1.0.11
+- xorg-libxau=1.0.12
 - xorg-libxdmcp=1.1.5
 - xz=5.6.3
 - xz-gpl-tools=5.6.3
