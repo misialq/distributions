@@ -35,7 +35,8 @@ jobs:
       - name: 'Construct and export env vars from setup.py'
         run: |
           cat setup.py
-          PROJECT_NAME=$(grep -oP 'name\s*=\s*"\K[^"]+' setup.py || true)
+          PROJECT_NAME=$(grep -oP "author\s*=\s*'\K[^']+" setup.py)
+          echo PROJECT_NAME
           PROJECT_AUTHOR_NAME=$(grep -oP 'author\s*=\s*"\K[^"]+' setup.py || true)
           PROJECT_AUTHOR_EMAIL=$(grep -oP 'author_email\s*=\s*"\K[^"]+' setup.py || true)
           PROJECT_DESCRIPTION=$(grep -oP 'description\s*=\s*"\K[^"]+' setup.py || true)
@@ -52,5 +53,6 @@ jobs:
       - name: 'Remove old setup files & relocate recipe file and check status'
         run: |
           rm MANIFEST.in setup.cfg setup.py versioneer.py $PLUGIN_NAME/_version.py &&
+          mkdir conda-recipe &&
           mv ci/recipe/meta.yaml conda-recipe/meta.yaml &&
           git status && git diff
