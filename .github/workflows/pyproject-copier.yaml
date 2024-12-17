@@ -140,7 +140,13 @@ jobs:
               if dep not in data['requirements']['host']:
                   data['requirements']['host'].append(dep)
 
-          output = yaml.safe_dump(data).replace("0.0.dummy", "{{ PLUGIN_VERSION }}")
+          desired_order = ["package", "source", "build", "requirements", "test", "about"]
+          new_data = {}
+          for key in desired_order:
+              if key in data:
+                  new_data[key] = data[key]
+
+          output = yaml.safe_dump(new_data).replace("0.0.dummy", "{{ PLUGIN_VERSION }}")
 
           with open(recipe_path, "w", encoding="utf-8") as fp:
               fp.write(output)
