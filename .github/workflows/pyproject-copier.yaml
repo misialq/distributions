@@ -55,6 +55,58 @@ jobs:
           mkdir conda-recipe &&
           mv ci/recipe/meta.yaml conda-recipe/meta.yaml
 
+      - name: 'Update versioning in __init__.py'
+        run: |
+          python - <<EOF
+          import sys
+
+          init_path = "__init__.py"
+          with open(init_path, "r", encoding="utf-8") as f:
+              content = f.read()
+
+          old_block = (
+              "from ._version import get_versions\n\n"
+              "__version__ = get_versions()['version']\n"
+              "del get_versions"
+          )
+
+          new_block = (
+              "try:\n"
+              "    from ._version import __version__\n"
+              "except ModuleNotFoundError:\n"
+              "    __version__ = '0.0.0+notfound'"
+          )
+
+          updated_content = content.replace(old_block, new_block)
+
+          with open(init_path, "w", encoding="utf-8") as f:
+              f.write(updated_content)
+          EOF
+
+      - name: 'Update location of recipe file in ci-dev workflow'
+        run: |
+          python - <<EOF
+          import sys
+
+          ci_dev_path = ".github/workflows/ci-dev.yaml"
+          with open(ci_dev_path), "r", encoding="utf-8") as f:
+            content = f.read()
+
+          old_path = (
+            "distro: amplicon\n"
+          )
+
+          new_path = (
+            "distro: amplicon\n"
+            "recipe-path: 'conda-recipe'"
+          )
+
+          updated_content = content.replace(old_path, new_path)
+
+          with open(ci_dev_path, "w", encoding="utf-8") as f:
+            f.write(updated_content)
+          EOF
+
       - name: 'Install and run copier'
         run: |
           pip install copier
