@@ -32,6 +32,10 @@ jobs:
           echo "MODULE_NAME=$MODULE_NAME" >> $GITHUB_ENV
           echo "PROJECT_URLS_REPOSITORY=$PROJECT_URLS_REPOSITORY" >> $GITHUB_ENV
 
+      - name: 'Double to single quotes in setup.py for grep consistency'
+        run: |
+          sed -i 's/"/'\''/g' setup.py
+
       - name: 'Construct and export env vars from setup.py'
         run: |
           PROJECT_NAME=$(grep -oP "name\s*=\s*'\K[^']+" setup.py || true)
