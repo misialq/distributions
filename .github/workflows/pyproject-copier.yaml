@@ -60,7 +60,7 @@ jobs:
           python - <<EOF
           import sys
 
-          init_path = "__init__.py"
+          init_path = "$PLUGIN_NAME/__init__.py"
           with open(init_path, "r", encoding="utf-8") as f:
               content = f.read()
 
