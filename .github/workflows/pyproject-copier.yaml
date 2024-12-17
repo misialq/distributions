@@ -39,15 +39,12 @@ jobs:
           PROJECT_AUTHOR_EMAIL=$(grep -oP "author_email\s*=\s*'\K[^']+" setup.py || true)
           PROJECT_DESCRIPTION=$(grep -oP "description\s*=\s*'\K[^']+" setup.py || true)
           PROJECT_URLS_HOMEPAGE=$(grep -oP "url\s*=\s*'\K[^']+" setup.py || true)
-          PROJECT_LICENSE_TYPE=$(grep -oP "license\s*=\s*'\K[^']+" setup.py || true)
-          PROJECT_LICENSE_FAMILY=$(grep -oP "license_family\s*=\s*'\K[^']+" ci/recipe/meta.yaml || true)
 
           echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
           echo "PROJECT_AUTHOR_NAME=$PROJECT_AUTHOR_NAME" >> $GITHUB_ENV
           echo "PROJECT_AUTHOR_EMAIL=$PROJECT_AUTHOR_EMAIL" >> $GITHUB_ENV
           echo "PROJECT_DESCRIPTION=$PROJECT_DESCRIPTION" >> $GITHUB_ENV
           echo "PROJECT_URLS_HOMEPAGE=$PROJECT_URLS_HOMEPAGE" >> $GITHUB_ENV
-          echo "PROJECT_LICENSE_TYPE=$PROJECT_LICENSE_TYPE" >> $GITHUB_ENV
 
       - name: 'Remove old setup files & relocate recipe file and check status'
         run: |
@@ -107,6 +104,45 @@ jobs:
             f.write(updated_content)
           EOF
 
+      - name: 'Update recipe file with pyproject.toml dependencies'
+        run: |
+          pip install pyyaml
+          python - <<EOF
+          import os
+          import yaml
+
+          fp = "conda-recipe/meta.yaml"
+          if not os.path.exists(fp):
+              raise Exception(f"{fp} not found.")
+
+          jinja_lines = []
+          with open(file_path, "r", encoding="utf-8") as fp:
+              for line in fp:
+                  if line.strip().startswith("{%"):
+                      continue
+                  jinja_lines.append(line)
+
+          content = "".join(jinja_lines)
+          recipe = yaml.safe_load(content)
+
+          data["package"]["version"] = "{{ PLUGIN_VERSION }}"
+          data["source"]["path"] = ".."
+
+          build_deps = ['setuptools', 'versioningit']
+          host_deps = ['setuptools', 'versioningit', 'wheel']
+
+          for dep in build_deps:
+              if dep not in data['requirements']['build']:
+                  data['requirements']['build'].append(dep)
+
+          for dep in host_deps:
+              if dep not in data['requirements']['host']:
+                  data['requirements']['host'].append(dep)
+
+          with open(file_path, "w", encoding="utf-8") as f:
+              yaml.safe_dump(data, f)
+          EOF
+
       - name: 'Install and run copier'
         run: |
           pip install copier
@@ -119,8 +155,6 @@ jobs:
           --data project_description="$PROJECT_DESCRIPTION" \
           --data project_urls_homepage="$PROJECT_URLS_HOMEPAGE" \
           --data project_urls_repository="$PROJECT_URLS_REPOSITORY" \
-          --data project_license_type="$PROJECT_LICENSE_TYPE" \
-          --data project_license_family="$PROJECT_LICENSE_FAMILY" \
           https://github.com/qiime2/q2-setup-template.git .
 
       - name: 'Create pull request from copier changes'
