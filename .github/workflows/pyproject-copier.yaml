@@ -123,7 +123,7 @@ jobs:
                   jinja_lines.append(line)
 
           content = "".join(jinja_lines)
-          content = content.replace("{{ version }}", "{{ PLUGIN_VERSION }}")
+          content = content.replace("{{ version }}", "0.0.dummy")
 
           data = yaml.safe_load(content)
 
@@ -140,8 +140,10 @@ jobs:
               if dep not in data['requirements']['host']:
                   data['requirements']['host'].append(dep)
 
+          output = yaml.safe_dump(data).replace("0.0.dummy", "{{ PLUGIN_VERSION }}")
+
           with open(recipe_path, "w", encoding="utf-8") as fp:
-              yaml.safe_dump(data, fp)
+              fp.write(output)
           EOF
 
       - name: 'Install and run copier'
