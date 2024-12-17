@@ -82,6 +82,7 @@ jobs:
       - name: 'Update location of recipe file in ci-dev workflow'
         run: |
           python - <<EOF
+          import sys
 
           ci_dev_path = ".github/workflows/ci-dev.yaml"
           with open(ci_dev_path, "r", encoding="utf-8") as f:
