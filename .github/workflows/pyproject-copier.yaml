@@ -93,7 +93,7 @@ jobs:
             content = f.read()
 
           old_path = (
-            "distro: amplicon\n"
+            "distro: amplicon"
           )
 
           new_path = (
