@@ -112,8 +112,8 @@ jobs:
           import yaml
 
           recipe_path = "conda-recipe/meta.yaml"
-          if not os.path.exists(fp):
-              raise Exception(f"{fp} not found.")
+          if not os.path.exists(recipe_path):
+              raise Exception(f"{recipe_path} not found.")
 
           jinja_lines = []
           with open(recipe_path, "r", encoding="utf-8") as fp:
