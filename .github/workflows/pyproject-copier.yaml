@@ -98,7 +98,7 @@ jobs:
 
           new_path = (
             "distro: amplicon\n"
-            "recipe-path: 'conda-recipe'"
+            "      recipe-path: 'conda-recipe'"
           )
 
           updated_content = content.replace(old_path, new_path)
