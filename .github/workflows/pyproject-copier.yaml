@@ -111,19 +111,19 @@ jobs:
           import os
           import yaml
 
-          fp = "conda-recipe/meta.yaml"
+          recipe_path = "conda-recipe/meta.yaml"
           if not os.path.exists(fp):
               raise Exception(f"{fp} not found.")
 
           jinja_lines = []
-          with open(file_path, "r", encoding="utf-8") as fp:
+          with open(recipe_path, "r", encoding="utf-8") as fp:
               for line in fp:
                   if line.strip().startswith("{%"):
                       continue
                   jinja_lines.append(line)
 
           content = "".join(jinja_lines)
-          recipe = yaml.safe_load(content)
+          data = yaml.safe_load(content)
 
           data["package"]["version"] = "{{ PLUGIN_VERSION }}"
           data["source"]["path"] = ".."
@@ -139,8 +139,8 @@ jobs:
               if dep not in data['requirements']['host']:
                   data['requirements']['host'].append(dep)
 
-          with open(file_path, "w", encoding="utf-8") as f:
-              yaml.safe_dump(data, f)
+          with open(recipe_path, "w", encoding="utf-8") as fp:
+              yaml.safe_dump(data, fp)
           EOF
 
       - name: 'Install and run copier'
