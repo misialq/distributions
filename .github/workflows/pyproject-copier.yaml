@@ -43,6 +43,7 @@ jobs:
           PROJECT_AUTHOR_EMAIL=$(grep -oP "author_email\s*=\s*'\K[^']+" setup.py || true)
           PROJECT_DESCRIPTION=$(grep -oP "description\s*=\s*'\K[^']+" setup.py || true)
           PROJECT_URLS_HOMEPAGE=$(grep -oP "url\s*=\s*'\K[^']+" setup.py || true)
+          PLUGIN_SCRIPTS=$(grep -oP "scripts\s*=\s*'\K[^']+" setup.py || true)
 
           if [ -z "$PROJECT_AUTHOR_EMAIL" ]; then
             PROJECT_AUTHOR_EMAIL=q2d2.noreply@gmail.com
@@ -53,6 +54,7 @@ jobs:
           echo "PROJECT_AUTHOR_EMAIL=$PROJECT_AUTHOR_EMAIL" >> $GITHUB_ENV
           echo "PROJECT_DESCRIPTION=$PROJECT_DESCRIPTION" >> $GITHUB_ENV
           echo "PROJECT_URLS_HOMEPAGE=$PROJECT_URLS_HOMEPAGE" >> $GITHUB_ENV
+          echo "PLUGIN_SCRIPTS=$PLUGIN_SCRIPTS" >> $GITHUB_ENV
 
       - name: 'Remove old setup files & relocate recipe file and check status'
         run: |
@@ -189,6 +191,7 @@ jobs:
           --data project_description="$PROJECT_DESCRIPTION" \
           --data project_urls_homepage="$PROJECT_URLS_HOMEPAGE" \
           --data project_urls_repository="$PROJECT_URLS_REPOSITORY" \
+          --data plugin_scripts="$PLUGIN_SCRIPTS" \
           https://github.com/qiime2/q2-setup-template.git .
 
       - name: 'Create pull request from copier changes'
