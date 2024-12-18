@@ -65,11 +65,15 @@ jobs:
           python - <<EOF
 
           init_path = "$PLUGIN_NAME/__init__.py"
+
           with open(init_path, "r", encoding="utf-8") as f:
-              content = f.read()
+              lines = f.readlines()
+
+          lines = [l for l in lines if "from ._version import get_versions" not in l]
+
+          content = "".join(lines)
 
           old_block = (
-              "from ._version import get_versions\n\n"
               "__version__ = get_versions()['version']\n"
               "del get_versions"
           )
@@ -85,6 +89,7 @@ jobs:
 
           with open(init_path, "w", encoding="utf-8") as f:
               f.write(updated_content)
+
           EOF
 
       - name: 'Update install command in Makefile'
