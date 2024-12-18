@@ -44,6 +44,10 @@ jobs:
           PROJECT_DESCRIPTION=$(grep -oP "description\s*=\s*'\K[^']+" setup.py || true)
           PROJECT_URLS_HOMEPAGE=$(grep -oP "url\s*=\s*'\K[^']+" setup.py || true)
 
+          if [ -z "$PROJECT_AUTHOR_EMAIL" ]; then
+            PROJECT_AUTHOR_EMAIL=q2d2.noreply@gmail.com
+          fi
+
           echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
           echo "PROJECT_AUTHOR_NAME=$PROJECT_AUTHOR_NAME" >> $GITHUB_ENV
           echo "PROJECT_AUTHOR_EMAIL=$PROJECT_AUTHOR_EMAIL" >> $GITHUB_ENV
