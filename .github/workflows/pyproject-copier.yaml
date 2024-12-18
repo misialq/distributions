@@ -83,6 +83,22 @@ jobs:
               f.write(updated_content)
           EOF
 
+      - name: 'Update install command in Makefile'
+        run: |
+          python - <<EOF
+
+          with open("Makefile", "r", encoding="utf-8") as f:
+            content = f.read()
+
+          old_block = ("$(PYTHON) setup.py install")
+          new_block = ("$(PYTHON) -m pip install -v .")
+
+          updated_content = content.replace(old_block, new_block)
+
+          with open("Makefile", "w", encoding="utf-8") as f:
+            f.write(updated_content)
+          EOF
+
       - name: 'Update location of recipe file in ci-dev workflow'
         run: |
           python - <<EOF
