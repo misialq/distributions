@@ -151,6 +151,9 @@ jobs:
           build_deps = ['setuptools', 'versioningit']
           host_deps = ['setuptools', 'versioningit', 'wheel']
 
+          if 'build' not in data['requirements']:
+            data['requirements']['build'] = []
+
           for dep in build_deps:
               if dep not in data['requirements']['build']:
                   data['requirements']['build'].append(dep)
