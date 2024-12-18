@@ -81,12 +81,6 @@ jobs:
           path: ${{ env.plugin_path }}
           fetch-depth: 0
 
-      - name: 'store ${{ github.event.repository.name }} checkout SHA'
-        shell: bash
-        run: |
-          gh_repo_sha=${{ steps.checkout-repo.outputs.commit }}
-          echo "GH_REPO_SHA=$gh_repo_sha" >> $GITHUB_ENV
-
       - uses: actions/checkout@v3
         with:
           repository: qiime2/distributions

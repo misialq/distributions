@@ -5,7 +5,7 @@ channels:
 dependencies:
 - _r-mutex=1.0.1
 - altair=5.5.0
-- anyio=4.6.2.post1
+- anyio=4.7.0
 - appdirs=1.4.4
 - appnope=0.1.4
 - argcomplete=3.5.1
@@ -131,7 +131,7 @@ dependencies:
 - fontconfig=2.14.2
 - fonts-conda-ecosystem=1
 - fonts-conda-forge=1
-- fonttools=4.55.1
+- fonttools=4.55.2
 - formulaic=1.0.2
 - fqdn=1.5.1
 - freetype=2.12.1
@@ -144,7 +144,7 @@ dependencies:
 - gffutils=0.10.1
 - gfortran_impl_osx-64=12.3.0
 - gfortran_osx-64=12.3.0
-- globus-sdk=3.48.0
+- globus-sdk=3.49.0
 - glpk=5.0
 - gmp=6.3.0
 - graphite2=1.3.13
@@ -208,7 +208,7 @@ dependencies:
 - libcblas=3.9.0
 - libclang-cpp18.1=18.1.7
 - libcurl=8.8.0
-- libcxx=19.1.4
+- libcxx=19.1.5
 - libdeflate=1.20
 - libedit=3.1.20191231
 - libev=4.33
@@ -230,6 +230,8 @@ dependencies:
 - liblapacke=3.9.0
 - libllvm14=14.0.6
 - libllvm18=18.1.7
+- liblzma=5.6.3
+- liblzma-devel=5.6.3
 - libnghttp2=1.58.0
 - libopenblas=0.3.28
 - libpng=1.6.43
@@ -244,12 +246,12 @@ dependencies:
 - libxml2=2.12.7
 - libxslt=1.1.39
 - libzlib=1.2.13
-- llvm-openmp=19.1.4
+- llvm-openmp=19.1.5
 - llvm-tools=18.1.7
 - llvmlite=0.42.0
 - lxml=5.2.2
 - lz4=4.3.3
-- lz4-c=1.9.4
+- lz4-c=1.10.0
 - mafft=7.526
 - make=4.4.1
 - markdown-it-py=3.0.0
@@ -315,7 +317,7 @@ dependencies:
 - perl-json-xs=4.03
 - perl-list-moreutils=0.430
 - perl-list-moreutils-xs=0.430
-- perl-parent=0.242
+- perl-parent=0.243
 - perl-pathtools=3.75
 - perl-scalar-list-utils=1.68
 - perl-storable=3.15
@@ -331,7 +333,7 @@ dependencies:
 - platformdirs=4.3.6
 - pluggy=1.5.0
 - prank=170427
-- prometheus_client=0.21.0
+- prometheus_client=0.21.1
 - prompt-toolkit=3.0.48
 - protobuf=3.20.3
 - psutil=6.1.0
@@ -367,7 +369,7 @@ dependencies:
 - q2-alignment=2025.4.0.dev0
 - q2-composition=2025.4.0.dev0
 - q2-cutadapt=2025.4.0.dev0
-- q2-dada2=2025.4.0.dev0
+- q2-dada2=2025.4.0.dev0+1.gb47f488
 - q2-deblur=2025.4.0.dev0
 - q2-demux=2025.4.0.dev0
 - q2-diversity=2025.4.0.dev0
@@ -403,7 +405,7 @@ dependencies:
 - r-beeswarm=0.4.0
 - r-bh=1.84.0_0
 - r-bibtex=0.5.1
-- r-bit=4.5.0
+- r-bit=4.5.0.1
 - r-bit64=4.5.2
 - r-bitops=1.0_9
 - r-blob=1.2.4
@@ -422,7 +424,7 @@ dependencies:
 - r-codetools=0.2_20
 - r-colorspace=2.1_1
 - r-conflicted=1.2.0
-- r-cpp11=0.5.0
+- r-cpp11=0.5.1
 - r-crayon=1.5.3
 - r-curl=6.0.1
 - r-cvxr=1.0_15
@@ -570,7 +572,7 @@ dependencies:
 - r-rootsolve=1.8.2.4
 - r-rpart=4.1.23
 - r-rprojroot=2.0.4
-- r-rsqlite=2.3.8
+- r-rsqlite=2.3.9
 - r-rstudioapi=0.17.1
 - r-rsvd=1.0.5
 - r-rtsne=0.17
@@ -623,7 +625,7 @@ dependencies:
 - rfc3986=2.0.0
 - rfc3986-validator=0.1.1
 - rich=13.9.4
-- rpds-py=0.22.0
+- rpds-py=0.22.3
 - rpsbproc=0.5.0
 - samtools=1.21
 - scikit-bio=0.6.0
@@ -639,11 +641,11 @@ dependencies:
 - sigtool=0.1.3
 - simpleeval=0.9.13
 - simplejson=3.19.3
-- six=1.16.0
+- six=1.17.0
 - sniffio=1.3.1
 - sortmerna=2.0
 - soupsieve=2.5
-- stack_data=0.6.2
+- stack_data=0.6.3
 - statsmodels=0.14.4
 - stringcase=1.2.0
 - tabulate=0.9.0
@@ -663,10 +665,10 @@ dependencies:
 - tqdm=4.67.1
 - traitlets=5.9.0
 - typeguard=4.4.1
-- typer=0.14.0
-- typer-slim=0.14.0
-- typer-slim-standard=0.14.0
-- types-python-dateutil=2.9.0.20241003
+- typer=0.15.1
+- typer-slim=0.15.1
+- typer-slim-standard=0.15.1
+- types-python-dateutil=2.9.0.20241206
 - typing-extensions=4.12.2
 - typing_extensions=4.12.2
 - typing_utils=0.1.0
@@ -681,7 +683,7 @@ dependencies:
 - validators=0.34.0
 - vsearch=2.22.1
 - wcwidth=0.2.13
-- webcolors=24.8.0
+- webcolors=24.11.1
 - webencodings=0.5.1
 - websocket-client=1.8.0
 - wget=1.21.4
@@ -692,7 +694,9 @@ dependencies:
 - xopen=2.0.2
 - xorg-libxau=1.0.11
 - xorg-libxdmcp=1.1.5
-- xz=5.2.6
+- xz=5.6.3
+- xz-gpl-tools=5.6.3
+- xz-tools=5.6.3
 - yaml=0.2.5
 - yq=3.4.3
 - zeromq=4.3.5

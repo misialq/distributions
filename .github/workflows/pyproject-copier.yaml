@@ -1,0 +1,205 @@
+name: pyproject-toml-copier
+on:
+  workflow_dispatch:
+    inputs:
+      plugin:
+        required: true
+        type: string
+      gh-org:
+        required: false
+        type: string
+        default: qiime2
+
+jobs:
+  pyproject-copier:
+    runs-on: ubuntu-latest
+    env:
+      plugin_name: ${{ inputs.plugin }}
+      repository: ${{ inputs.gh-org }}/${{ inputs.plugin }}
+      repo_url: https://github.com/${{ inputs.gh-org }}/${{ inputs.plugin }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.repository }}
+
+      - name: 'Construct env vars from action inputs and export'
+        run: |
+          PLUGIN_NAME=$(echo "${{ env.plugin_name }}" | sed 's/-/_/g')
+          MODULE_NAME=$(echo "$PLUGIN_NAME" | sed 's/^q2_//')
+          PROJECT_URLS_REPOSITORY=${{ env.repo_url }}
+
+          echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV
+          echo "MODULE_NAME=$MODULE_NAME" >> $GITHUB_ENV
+          echo "PROJECT_URLS_REPOSITORY=$PROJECT_URLS_REPOSITORY" >> $GITHUB_ENV
+
+      - name: 'Double to single quotes in setup.py for grep consistency'
+        run: |
+          sed -i 's/"/'\''/g' setup.py
+
+      - name: 'Construct and export env vars from setup.py'
+        run: |
+          PROJECT_NAME=$(grep -oP "name\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_AUTHOR_NAME=$(grep -oP "author\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_AUTHOR_EMAIL=$(grep -oP "author_email\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_DESCRIPTION=$(grep -oP "description\s*=\s*'\K[^']+" setup.py || true)
+          PROJECT_URLS_HOMEPAGE=$(grep -oP "url\s*=\s*'\K[^']+" setup.py || true)
+
+          if [ -z "$PROJECT_AUTHOR_EMAIL" ]; then
+            PROJECT_AUTHOR_EMAIL=q2d2.noreply@gmail.com
+          fi
+
+          echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
+          echo "PROJECT_AUTHOR_NAME=$PROJECT_AUTHOR_NAME" >> $GITHUB_ENV
+          echo "PROJECT_AUTHOR_EMAIL=$PROJECT_AUTHOR_EMAIL" >> $GITHUB_ENV
+          echo "PROJECT_DESCRIPTION=$PROJECT_DESCRIPTION" >> $GITHUB_ENV
+          echo "PROJECT_URLS_HOMEPAGE=$PROJECT_URLS_HOMEPAGE" >> $GITHUB_ENV
+
+      - name: 'Remove old setup files & relocate recipe file and check status'
+        run: |
+          rm MANIFEST.in setup.cfg setup.py versioneer.py $PLUGIN_NAME/_version.py &&
+          mkdir conda-recipe &&
+          mv ci/recipe/meta.yaml conda-recipe/meta.yaml
+
+      - name: 'Update versioning in __init__.py'
+        run: |
+          python - <<EOF
+
+          init_path = "$PLUGIN_NAME/__init__.py"
+
+          with open(init_path, "r", encoding="utf-8") as f:
+              lines = f.readlines()
+
+          lines = [l for l in lines if "from ._version import get_versions" not in l]
+
+          content = "".join(lines)
+
+          old_block = (
+              "__version__ = get_versions()['version']\n"
+              "del get_versions"
+          )
+
+          new_block = (
+              "try:\n"
+              "    from ._version import __version__\n"
+              "except ModuleNotFoundError:\n"
+              "    __version__ = '0.0.0+notfound'"
+          )
+
+          updated_content = content.replace(old_block, new_block)
+
+          with open(init_path, "w", encoding="utf-8") as f:
+              f.write(updated_content)
+
+          EOF
+
+      - name: 'Update install command in Makefile'
+        run: |
+          python - <<EOF
+
+          with open("Makefile", "r", encoding="utf-8") as f:
+            content = f.read()
+
+          old_block = ("$(PYTHON) setup.py install")
+          new_block = ("$(PYTHON) -m pip install -v .")
+
+          updated_content = content.replace(old_block, new_block)
+
+          with open("Makefile", "w", encoding="utf-8") as f:
+            f.write(updated_content)
+          EOF
+
+      - name: 'Update location of recipe file in ci-dev workflow'
+        run: |
+          python - <<EOF
+          import sys
+
+          ci_dev_path = ".github/workflows/ci-dev.yaml"
+          with open(ci_dev_path, "r", encoding="utf-8") as f:
+            content = f.read()
+
+          old_path = (
+            "distro: amplicon"
+          )
+
+          new_path = (
+            "distro: amplicon\n"
+            "      recipe-path: 'conda-recipe'"
+          )
+
+          updated_content = content.replace(old_path, new_path)
+
+          with open(ci_dev_path, "w", encoding="utf-8") as f:
+            f.write(updated_content)
+          EOF
+
+      - name: 'Update recipe file with pyproject.toml dependencies'
+        run: |
+          pip install --upgrade pyyaml
+          python - <<EOF
+          import os
+          import yaml
+
+          recipe_path = "conda-recipe/meta.yaml"
+          if not os.path.exists(recipe_path):
+              raise Exception(f"{recipe_path} not found.")
+
+          jinja_lines = []
+          with open(recipe_path, "r", encoding="utf-8") as fp:
+              for line in fp:
+                  if line.strip().startswith("{%"):
+                      continue
+                  jinja_lines.append(line)
+
+          content = "".join(jinja_lines)
+          content = content.replace("{{ version }}", "0.0.dummy")
+
+          data = yaml.safe_load(content)
+
+          data["source"]["path"] = ".."
+
+          build_deps = ['setuptools', 'versioningit']
+          host_deps = ['setuptools', 'versioningit', 'wheel']
+
+          if 'build' not in data['requirements']:
+            data['requirements']['build'] = []
+
+          for dep in build_deps:
+              if dep not in data['requirements']['build']:
+                  data['requirements']['build'].append(dep)
+
+          for dep in host_deps:
+              if dep not in data['requirements']['host']:
+                  data['requirements']['host'].append(dep)
+
+          output = yaml.safe_dump(data, sort_keys=False).replace("0.0.dummy", "{{ PLUGIN_VERSION }}")
+
+          with open(recipe_path, "w", encoding="utf-8") as fp:
+              fp.write(output)
+          EOF
+
+      - name: 'Install and run copier'
+        run: |
+          pip install copier
+          copier copy \
+          --data project_name="$PROJECT_NAME" \
+          --data plugin_name="$PLUGIN_NAME" \
+          --data module_name="$MODULE_NAME" \
+          --data project_author_name="$PROJECT_AUTHOR_NAME" \
+          --data project_author_email="$PROJECT_AUTHOR_EMAIL" \
+          --data project_description="$PROJECT_DESCRIPTION" \
+          --data project_urls_homepage="$PROJECT_URLS_HOMEPAGE" \
+          --data project_urls_repository="$PROJECT_URLS_REPOSITORY" \
+          https://github.com/qiime2/q2-setup-template.git .
+
+      - name: 'Create pull request from copier changes'
+        uses: qiime2/create-pull-request@v5
+        with:
+          token: ${{ secrets. BOT_PAT }}
+          branch: automated/pyproject-toml-update
+          title: "setup.py -> pyproject.toml"
+          body: |
+            Transition from setup.py & friends to pyproject.toml
+          author: "q2d2 <q2d2.noreply@gmail.com>"
+          committer: "q2d2 <q2d2.noreply@gmail.com>"
+          commit-message: |
+            Transition from setup.py & friends to pyproject.toml
