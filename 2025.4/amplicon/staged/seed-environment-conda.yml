@@ -17,8 +17,8 @@ dependencies:
 - python=3.10
 - python_abi=3.9
 - q2-alignment=2025.4.0.dev0
-- q2-composition=2025.4.0.dev0
-- q2-cutadapt=2025.4.0.dev0
+- q2-composition=2025.4.0.dev0+1.gc26af33
+- q2-cutadapt=2025.4.0.dev0+1.geb8bbe1
 - q2-dada2=2025.4.0.dev0+1.gb47f488
 - q2-deblur=2025.4.0.dev0
 - q2-demux=2025.4.0.dev0
@@ -26,7 +26,7 @@ dependencies:
 - q2-diversity=2025.4.0.dev0
 - q2-emperor=2025.4.0.dev0
 - q2-feature-classifier=2025.4.0.dev0
-- q2-feature-table=2025.4.0.dev0+1.gcb009e7
+- q2-feature-table=2025.4.0.dev0+2.ga05f7ac
 - q2-fragment-insertion=2025.4.0.dev0
 - q2-longitudinal=2025.4.0.dev0
 - q2-metadata=2025.4.0.dev0
@@ -35,7 +35,7 @@ dependencies:
 - q2-quality-control=2025.4.0.dev0
 - q2-quality-filter=2025.4.0.dev0+1.g5d1e22f
 - q2-sample-classifier=2025.4.0.dev0
-- q2-stats=2025.4.0.dev0+1.g253c0f6
+- q2-stats=2025.4.0.dev0+3.g5e13641
 - q2-taxa=2025.4.0.dev0
 - q2-types=2025.4.0.dev0
 - q2-vizard=2025.4.0.dev0+65.g1e59022
