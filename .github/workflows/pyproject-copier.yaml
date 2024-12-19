@@ -121,8 +121,8 @@ jobs:
 
           version_file = (
             "\n"
-            "# Version file from versioningit"
-            "_version.py"
+            "# Version file from versioningit\n"
+            "_version.py\n"
             "\n"
           )
 
