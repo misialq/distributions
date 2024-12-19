@@ -117,17 +117,18 @@ jobs:
 
       - name: 'Add _version.py to .gitignore'
         run: |
-            python = <<EOF
+          ls -al
+          python = <<EOF
 
-            version_file = (
-              "\n"
-              "# Version file from versioningit"
-              "_version.py"
-            )
+          version_file = (
+            "\n"
+            "# Version file from versioningit"
+            "_version.py"
+          )
 
-            with open('.gitignore', "w", encoding="utf-8") as f:
-              f.write(version_file)
-            EOF
+          with open('.gitignore', "w", encoding="utf-8") as f:
+            f.write(version_file)
+          EOF
 
       - name: 'Update location of recipe file in ci-dev workflow'
         run: |
