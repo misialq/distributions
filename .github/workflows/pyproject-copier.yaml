@@ -63,8 +63,8 @@ jobs:
 
       - name: 'Remove old setup files & relocate recipe file and check status'
         run: |
-          rm MANIFEST.in setup.cfg setup.py versioneer.py $PLUGIN_NAME/_version.py &&
-          mkdir conda-recipe &&
+          rm -f MANIFEST.in setup.cfg setup.py versioneer.py $PLUGIN_NAME/_version.py &&
+          mkdir -p conda-recipe &&
           mv ci/recipe/meta.yaml conda-recipe/meta.yaml
 
       - name: 'Update versioning in __init__.py'
