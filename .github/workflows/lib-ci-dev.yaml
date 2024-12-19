@@ -23,7 +23,7 @@ on:
         description: "Path to recipe"
         type: string
         required: false
-        default: 'ci/recipe'
+        default: 'conda-recipe/'
 
       additional-reports-path:
         description: "Path of additional reports to store in GH artifact"
