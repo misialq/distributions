@@ -9,6 +9,10 @@ on:
         required: false
         type: string
         default: qiime2
+      distribution:
+        required: false
+        type: string
+        default: amplicon
 
 jobs:
   pyproject-copier:
@@ -17,6 +21,7 @@ jobs:
       plugin_name: ${{ inputs.plugin }}
       repository: ${{ inputs.gh-org }}/${{ inputs.plugin }}
       repo_url: https://github.com/${{ inputs.gh-org }}/${{ inputs.plugin }}
+      distro: ${{ inputs.distribution }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,7 +51,7 @@ jobs:
           PLUGIN_SCRIPTS=$(grep -oP "scripts=\['\K[^']+" setup.py || true)
 
           if [ -z "$PROJECT_AUTHOR_EMAIL" ]; then
-            PROJECT_AUTHOR_EMAIL=q2d2.noreply@gmail.com
+            PROJECT_AUTHOR_EMAIL=developers@qiime2.org
           fi
 
           echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
@@ -110,6 +115,20 @@ jobs:
             f.write(updated_content)
           EOF
 
+      - name: 'Add _version.py to .gitignore'
+        run: |
+            python = <<EOF
+
+            version_file = (
+              "\n"
+              "# Version file from versioningit"
+              "_version.py"
+            )
+
+            with open('.gitignore', "w", encoding="utf-8") as f:
+              f.write(version_file)
+            EOF
+
       - name: 'Update location of recipe file in ci-dev workflow'
         run: |
           python - <<EOF
@@ -120,11 +139,11 @@ jobs:
             content = f.read()
 
           old_path = (
-            "distro: amplicon"
+            "distro: ${{ env.distro }}"
           )
 
           new_path = (
-            "distro: amplicon\n"
+            "distro: ${{ env.distro }}\n"
             "      recipe-path: 'conda-recipe'"
           )
 
