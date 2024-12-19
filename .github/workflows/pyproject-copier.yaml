@@ -80,9 +80,14 @@ jobs:
 
           content = "".join(lines)
 
-          old_block = (
+          old_block1 = (
               "__version__ = get_versions()['version']\n"
               "del get_versions"
+          )
+
+          old_block2 = (
+              '__version__ = get_versions()["version"]\n'
+              'del get_versions'
           )
 
           new_block = (
@@ -92,7 +97,12 @@ jobs:
               "    __version__ = '0.0.0+notfound'"
           )
 
-          updated_content = content.replace(old_block, new_block)
+          if old_block1 in content:
+              updated_content = content.replace(old_block1, new_block)
+          elif old_block2 in content:
+              updated_content = content.replace(old_block2, new_block)
+          else:
+            updated_content = content
 
           with open(init_path, "w", encoding="utf-8") as f:
               f.write(updated_content)
