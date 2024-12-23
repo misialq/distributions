@@ -7,6 +7,10 @@ next_epoch: "2025.10"
 distros: [tiny, amplicon, metagenome, pathogenome, test]
 packages:
 
+- name: MOSHPIT
+  repo: bokulich-lab/MOSHPIT
+  distros: [metagenome]
+
 - name: q2-alignment
   repo: qiime2/q2-alignment
   distros: [amplicon, metagenome, pathogenome]
@@ -99,6 +103,10 @@ packages:
   repo: qiime2/q2-sample-classifier
   distros: [amplicon, metagenome]
 
+- name: q2-sapienns
+  repo: caporaso-lab/q2-sapienns
+  distros: [metagenome]
+
 - name: q2-sourmash
   repo: dib-lab/q2-sourmash
   distros: [metagenome]
@@ -146,7 +154,3 @@ packages:
 - name: rescript
   repo: bokulich-lab/RESCRIPt
   distros: [amplicon, metagenome, pathogenome]
-
-- name: q2-sapienns
-  repo: caporaso-lab/q2-sapienns
-  distros: [metagenome]
