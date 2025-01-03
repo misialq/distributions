@@ -16,7 +16,7 @@ dependencies:
 - attrs=24.3.0
 - bcrypt=4.2.1
 - beautifulsoup4=4.12.3
-- bibtexparser=1.4.2
+- bibtexparser=1.4.3
 - binutils_impl_linux-64=2.43
 - biom-format=2.1.15
 - bleach=6.2.0
@@ -31,7 +31,7 @@ dependencies:
 - certifi=2024.12.14
 - cffi=1.17.1
 - charset-normalizer=3.4.0
-- click=8.1.7
+- click=8.1.8
 - colorama=0.4.6
 - comm=0.2.2
 - conda-pack=0.7.0
@@ -68,6 +68,7 @@ dependencies:
 - hdf5=1.14.3
 - hdmedians=0.14.2
 - hpack=4.0.0
+- htslib=1.21
 - hyperframe=6.0.1
 - icu=75.1
 - idna=3.10
@@ -120,7 +121,6 @@ dependencies:
 - liblapack=3.9.0
 - liblapacke=3.9.0
 - liblzma=5.6.3
-- liblzma-devel=5.6.3
 - libnghttp2=1.64.0
 - libnsl=2.0.1
 - libopenblas=0.3.28
@@ -178,7 +178,7 @@ dependencies:
 - pluggy=1.5.0
 - prometheus_client=0.21.1
 - prompt-toolkit=3.0.48
-- psutil=6.1.0
+- psutil=6.1.1
 - pthread-stubs=0.4
 - ptyprocess=0.7.0
 - pure_eval=0.2.3
@@ -187,7 +187,7 @@ dependencies:
 - pyhmmer=0.10.15
 - pyjwt=2.10.1
 - pynacl=1.5.0
-- pyparsing=3.2.0
+- pyparsing=3.2.1
 - pysocks=1.7.1
 - pytest=8.3.4
 - python=3.10.16
@@ -224,7 +224,7 @@ dependencies:
 - rfc3339-validator=0.1.4
 - rfc3986-validator=0.1.1
 - rpds-py=0.22.3
-- samtools=1.6
+- samtools=1.21
 - scikit-bio=0.6.0
 - scikit-learn=1.4.2
 - scipy=1.13.0
@@ -257,7 +257,7 @@ dependencies:
 - unifrac=1.3
 - unifrac-binaries=1.4
 - uri-template=1.3.0
-- urllib3=2.2.3
+- urllib3=2.3.0
 - wcwidth=0.2.13
 - webcolors=24.11.1
 - webencodings=0.5.1
@@ -271,9 +271,6 @@ dependencies:
 - xorg-libxext=1.3.6
 - xorg-libxrender=0.9.12
 - xorg-libxt=1.3.1
-- xz=5.6.3
-- xz-gpl-tools=5.6.3
-- xz-tools=5.6.3
 - yaml=0.2.5
 - zeromq=4.3.5
 - zipp=3.21.0
