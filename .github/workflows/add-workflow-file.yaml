@@ -55,15 +55,18 @@ jobs:
             git clone --depth 1 https://x-access-token:${REPO_PUSH_TOKEN}@github.com/$REPO
             cd "$(basename "$REPO")"
 
-            git checkout -b "$TARGET_BRANCH" || git checkout "$TARGET_BRANCH"
+            DEFAULT_BRANCH=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+            echo "Default branch for $REPO is $DEFAULT_BRANCH"
+
+            git checkout "${DEFAULT_BRANCH}"
 
             mkdir -p .github/workflows
 
             cp "../${WORKFLOW_FILE_PATH}" ".github/workflows/$(basename "$WORKFLOW_FILE_PATH")"
 
             git add ".github/workflows/$(basename "$WORKFLOW_FILE_PATH")"
-            git commit -m "Add designated workflow file ($(basename "$WORKFLOW_FILE_PATH"))"
-            git push origin "$TARGET_BRANCH"
+            git commit -m "Add/Update designated workflow file ($(basename "$WORKFLOW_FILE_PATH"))" || echo "No changes to commit"
+            git push origin "${DEFAULT_BRANCH}"
 
             cd ..
             rm -rf "$(basename "$REPO")"
