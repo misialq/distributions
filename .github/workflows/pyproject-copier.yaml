@@ -227,7 +227,7 @@ jobs:
       - name: 'Create pull request from copier changes'
         uses: qiime2/create-pull-request@v5
         with:
-          token: ${{ secrets. BOT_PAT }}
+          token: ${{ secrets.BOT_PAT }}
           branch: automated/pyproject-toml-update
           title: "setup.py -> pyproject.toml"
           body: |
