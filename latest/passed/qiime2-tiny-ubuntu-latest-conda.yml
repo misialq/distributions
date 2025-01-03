@@ -81,7 +81,7 @@ dependencies:
 - ipython_genutils=0.2.0
 - isoduration=20.11.0
 - jedi=0.19.2
-- jinja2=3.1.4
+- jinja2=3.1.5
 - joblib=1.4.2
 - jsonpointer=3.0.0
 - jsonschema=4.23.0
@@ -134,7 +134,7 @@ dependencies:
 - libstdcxx-ng=14.2.0
 - libtiff=4.7.0
 - libuuid=2.38.1
-- libwebp-base=1.4.0
+- libwebp-base=1.5.0
 - libxcb=1.17.0
 - libxcrypt=4.4.36
 - libxml2=2.13.5
