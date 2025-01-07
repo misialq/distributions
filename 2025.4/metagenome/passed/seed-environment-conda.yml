@@ -11,7 +11,7 @@ dependencies:
 - hdf5=1.14.3
 - mafft=7.526
 - matplotlib=3.8.4
-- MOSHPIT=2025.4.0.dev0
+- moshpit=0.0.dev0
 - notebook=6.5.5
 - numpy=1.26.4
 - pandas=2.2.2
