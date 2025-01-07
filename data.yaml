@@ -7,7 +7,7 @@ next_epoch: "2025.10"
 distros: [tiny, amplicon, metagenome, pathogenome, test]
 packages:
 
-- name: MOSHPIT
+- name: moshpit
   repo: bokulich-lab/MOSHPIT
   distros: [metagenome]
 
