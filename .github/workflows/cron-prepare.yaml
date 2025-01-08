@@ -18,16 +18,16 @@ jobs:
     with:
       distro: amplicon
 
-  metagenome:
+  moshpit:
     needs: [tiny, amplicon]
     if: ${{ always() && !cancelled() && !contains(needs.tiny.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
     uses: ./.github/workflows/create-prepare-pr.yaml
     secrets: inherit
     with:
-      distro: metagenome
+      distro: moshpit
 
   pathogenome:
-    needs: [tiny, amplicon, metagenome]
+    needs: [tiny, amplicon, moshpit]
     if: ${{ always() && !cancelled() && !contains(needs.tiny.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
     uses: ./.github/workflows/create-prepare-pr.yaml
     secrets: inherit

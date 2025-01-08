@@ -4,16 +4,16 @@ released_epoch: "2024.10"
 active_epoch: "2025.4"
 # this is the next dev cycle epoch (i.e. 20XX.REL+2)
 next_epoch: "2025.10"
-distros: [tiny, amplicon, metagenome, pathogenome, test]
+distros: [tiny, amplicon, moshpit, pathogenome, test]
 packages:
 
 - name: moshpit
   repo: bokulich-lab/MOSHPIT
-  distros: [metagenome]
+  distros: [moshpit]
 
 - name: q2-alignment
   repo: qiime2/q2-alignment
-  distros: [amplicon, metagenome, pathogenome]
+  distros: [amplicon, moshpit, pathogenome]
 
 - name: q2-amrfinderplus
   repo: bokulich-lab/q2-amrfinderplus
@@ -21,15 +21,15 @@ packages:
 
 - name: q2-assembly
   repo: bokulich-lab/q2-assembly
-  distros: [metagenome, pathogenome]
+  distros: [moshpit, pathogenome]
 
 - name: q2-composition
   repo: qiime2/q2-composition
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-cutadapt
   repo: qiime2/q2-cutadapt
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-dada2
   repo: qiime2/q2-dada2
@@ -41,19 +41,19 @@ packages:
 
 - name: q2-demux
   repo: qiime2/q2-demux
-  distros: [amplicon, metagenome, pathogenome]
+  distros: [amplicon, moshpit, pathogenome]
 
 - name: q2-diversity
   repo: qiime2/q2-diversity
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-diversity-lib
   repo: qiime2/q2-diversity-lib
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-emperor
   repo: qiime2/q2-emperor
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-feature-classifier
   repo: qiime2/q2-feature-classifier
@@ -61,11 +61,11 @@ packages:
 
 - name: q2-feature-table
   repo: qiime2/q2-feature-table
-  distros: [amplicon, metagenome, pathogenome]
+  distros: [amplicon, moshpit, pathogenome]
 
 - name: q2-fondue
   repo: bokulich-lab/q2-fondue
-  distros: [metagenome]
+  distros: [moshpit]
 
 - name: q2-fragment-insertion
   repo: qiime2/q2-fragment-insertion
@@ -73,19 +73,19 @@ packages:
 
 - name: q2-longitudinal
   repo: qiime2/q2-longitudinal
-  distros: [amplicon, metagenome, pathogenome]
+  distros: [amplicon, moshpit, pathogenome]
 
 - name: q2-metadata
   repo: qiime2/q2-metadata
-  distros: [tiny, amplicon, metagenome]
+  distros: [tiny, amplicon, moshpit]
 
 - name: q2-moshpit
   repo: bokulich-lab/q2-moshpit
-  distros: [metagenome]
+  distros: [moshpit]
 
 - name: q2-mystery-stew
   repo: qiime2/q2-mystery-stew
-  distros: [tiny, amplicon, metagenome, pathogenome]
+  distros: [tiny, amplicon, moshpit, pathogenome]
 
 - name: q2-phylogeny
   repo: qiime2/q2-phylogeny
@@ -93,23 +93,23 @@ packages:
 
 - name: q2-quality-control
   repo: qiime2/q2-quality-control
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-quality-filter
   repo: qiime2/q2-quality-filter
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-sample-classifier
   repo: qiime2/q2-sample-classifier
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2-sapienns
   repo: caporaso-lab/q2-sapienns
-  distros: [metagenome]
+  distros: [moshpit]
 
 - name: q2-sourmash
   repo: dib-lab/q2-sourmash
-  distros: [metagenome]
+  distros: [moshpit]
 
 - name: q2-stats
   repo: qiime2/q2-stats
@@ -117,11 +117,11 @@ packages:
 
 - name: q2-taxa
   repo: qiime2/q2-taxa
-  distros: [amplicon, community, metagenome]
+  distros: [amplicon, community, moshpit]
 
 - name: q2-types
   repo: qiime2/q2-types
-  distros: [tiny, amplicon, metagenome, pathogenome]
+  distros: [tiny, amplicon, moshpit, pathogenome]
 
 - name: q2-viromics
   repo: bokulich-lab/q2-viromics
@@ -129,28 +129,28 @@ packages:
 
 - name: q2-vizard
   repo: qiime2/q2-vizard
-  distros: [amplicon, metagenome, pathogenome]
+  distros: [amplicon, moshpit, pathogenome]
 
 - name: q2-vsearch
   repo: qiime2/q2-vsearch
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2cli
   repo: qiime2/q2cli
-  distros: [tiny, amplicon, metagenome, pathogenome]
+  distros: [tiny, amplicon, moshpit, pathogenome]
 
 - name: q2galaxy
   repo: qiime2/q2galaxy
-  distros: [amplicon, metagenome]
+  distros: [amplicon, moshpit]
 
 - name: q2templates
   repo: qiime2/q2templates
-  distros: [tiny, amplicon, metagenome, pathogenome, test]
+  distros: [tiny, amplicon, moshpit, pathogenome, test]
 
 - name: qiime2
   repo: qiime2/qiime2
-  distros: [tiny, amplicon, metagenome, pathogenome]
+  distros: [tiny, amplicon, moshpit, pathogenome]
 
 - name: rescript
   repo: bokulich-lab/RESCRIPt
-  distros: [amplicon, metagenome, pathogenome]
+  distros: [amplicon, moshpit, pathogenome]

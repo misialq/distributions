@@ -65,7 +65,7 @@ EPOCH := foo
 
 Please ensure that `EPOCH` is a valid release, with a published environment file under 20XX.REL (within this repository).
 
-Note that `DISTRO` is currently set to `metagenome`, but this may need to be changed in the future as additional distributions are released within the QIIME 2 ecosystem.
+Note that `DISTRO` is currently set to `moshpit`, but this may need to be changed in the future as additional distributions are released within the QIIME 2 ecosystem.
 
 ### Docker
 
