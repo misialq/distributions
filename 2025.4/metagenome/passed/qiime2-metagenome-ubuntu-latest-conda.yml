@@ -94,6 +94,7 @@ dependencies:
 - bitstring=3.1.9
 - blast=2.16.0
 - bleach=6.2.0
+- bleach-with-css=6.2.0
 - boost-cpp=1.85.0
 - bowtie2=2.5.1
 - bracken=3.0
@@ -203,7 +204,7 @@ dependencies:
 - ijson=3.3.0
 - imagesize=1.4.1
 - importlib-metadata=8.5.0
-- importlib_resources=6.4.5
+- importlib_resources=6.5.2
 - iniconfig=2.0.0
 - insilicoseq=2.0.1
 - interface_meta=1.3.0
@@ -338,6 +339,7 @@ dependencies:
 - miniprot=0.13
 - mistune=3.1.0
 - mmseqs2=16.747c6
+- moshpit=0.0.1+6.ga9e308e
 - mpfr=4.2.1
 - mpg123=1.32.9
 - mpi=1.0.1
@@ -348,7 +350,7 @@ dependencies:
 - mysql-common=8.3.0
 - mysql-connector-c=6.1.11
 - mysql-libs=8.3.0
-- narwhals=1.21.0
+- narwhals=1.21.1
 - natsort=8.4.0
 - nbclassic=1.1.0
 - nbclient=0.10.2
@@ -478,7 +480,7 @@ dependencies:
 - pydantic=2.10.4
 - pydantic-core=2.27.2
 - pyfaidx=0.8.1.3
-- pygments=2.18.0
+- pygments=2.19.1
 - pyhmmer=0.10.15
 - pyjwt=2.10.1
 - pymongo=4.10.1
@@ -503,13 +505,13 @@ dependencies:
 - pyvcf3=1.0.3
 - pyyaml=6.0.2
 - pyzmq=24.0.1
-- pyzotero=1.6.2
+- pyzotero=1.6.3
 - q2-alignment=2025.4.0.dev0+4.g06d67c6
 - q2-assembly=2025.4.0.dev0+3.g1aa29f7
 - q2-composition=2025.4.0.dev0+6.gd28ef42
 - q2-cutadapt=2025.4.0.dev0+5.g3982157
 - q2-demux=2025.4.0.dev0+4.g65f6480
-- q2-diversity=2025.4.0.dev0+5.gd2b26a5
+- q2-diversity=2025.4.0.dev0+6.g5170bf1
 - q2-diversity-lib=2025.4.0.dev0+4.g4d30f67
 - q2-emperor=2025.4.0.dev0+4.gb3cbec3
 - q2-feature-classifier=2025.4.0.dev0+4.g723dff9
@@ -654,7 +656,7 @@ dependencies:
 - r-magrittr=2.0.3
 - r-mass=7.3_60.0.1
 - r-matrix=1.6_5
-- r-matrixstats=1.4.1
+- r-matrixstats=1.5.0
 - r-memoise=2.0.1
 - r-mgcv=1.9_1
 - r-mime=0.12
@@ -672,7 +674,7 @@ dependencies:
 - r-osqp=0.6.3.3
 - r-permute=0.9_7
 - r-pheatmap=1.0.12
-- r-pillar=1.10.0
+- r-pillar=1.10.1
 - r-pixmap=0.4_13
 - r-pkgbuild=1.4.5
 - r-pkgconfig=2.0.3
@@ -717,7 +719,7 @@ dependencies:
 - r-rmpfr=1.0_0
 - r-rngtools=1.5.2
 - r-rootsolve=1.8.2.4
-- r-rpart=4.1.23
+- r-rpart=4.1.24
 - r-rprojroot=2.0.4
 - r-rsqlite=2.3.9
 - r-rstudioapi=0.17.1

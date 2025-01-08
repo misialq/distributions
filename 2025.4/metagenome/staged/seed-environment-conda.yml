@@ -12,6 +12,7 @@ dependencies:
 - hdf5=1.14.3
 - mafft=7.526
 - matplotlib=3.8.4
+- moshpit=0.0.1+6.ga9e308e
 - notebook=6.5.5
 - numpy=1.26.4
 - pandas=2.2.2
@@ -26,7 +27,7 @@ dependencies:
 - q2-cutadapt=2025.4.0.dev0+5.g3982157
 - q2-demux=2025.4.0.dev0+4.g65f6480
 - q2-diversity-lib=2025.4.0.dev0+4.g4d30f67
-- q2-diversity=2025.4.0.dev0+5.gd2b26a5
+- q2-diversity=2025.4.0.dev0+6.g5170bf1
 - q2-emperor=2025.4.0.dev0+4.gb3cbec3
 - q2-feature-classifier=2025.4.0.dev0+4.g723dff9
 - q2-feature-table=2025.4.0.dev0+6.gda8969c
