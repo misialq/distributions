@@ -20,7 +20,6 @@ jobs:
 
   moshpit:
     needs: [tiny, amplicon]
-    if: ${{ always() && !cancelled() && !contains(needs.tiny.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
     uses: ./.github/workflows/create-prepare-pr.yaml
     secrets: inherit
     with:
@@ -28,7 +27,6 @@ jobs:
 
   pathogenome:
     needs: [tiny, amplicon, moshpit]
-    if: ${{ always() && !cancelled() && !contains(needs.tiny.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
     uses: ./.github/workflows/create-prepare-pr.yaml
     secrets: inherit
     with:
