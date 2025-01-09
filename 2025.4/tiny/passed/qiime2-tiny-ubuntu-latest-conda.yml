@@ -6,7 +6,7 @@ dependencies:
 - _libgcc_mutex=0.1
 - _openmp_mutex=4.5
 - _r-mutex=1.0.1
-- anyio=4.7.0
+- anyio=4.8.0
 - appdirs=1.4.4
 - argon2-cffi=23.1.0
 - argon2-cffi-bindings=21.2.0
@@ -18,8 +18,9 @@ dependencies:
 - beautifulsoup4=4.12.3
 - bibtexparser=1.4.3
 - binutils_impl_linux-64=2.43
-- biom-format=2.1.15
+- biom-format=2.1.16
 - bleach=6.2.0
+- bleach-with-css=6.2.0
 - brotli-python=1.1.0
 - bwidget=1.10.1
 - bzip2=1.0.8
@@ -74,7 +75,7 @@ dependencies:
 - idna=3.10
 - ijson=3.3.0
 - importlib-metadata=8.5.0
-- importlib_resources=6.4.5
+- importlib_resources=6.5.2
 - iniconfig=2.0.0
 - iow=1.0.5
 - ipykernel=6.29.5
@@ -104,7 +105,7 @@ dependencies:
 - libcblas=3.9.0
 - libcurl=8.11.1
 - libdeflate=1.23
-- libedit=3.1.20191231
+- libedit=3.1.20240808
 - libev=4.33
 - libexpat=2.6.4
 - libffi=3.4.2
@@ -124,7 +125,7 @@ dependencies:
 - libnghttp2=1.64.0
 - libnsl=2.0.1
 - libopenblas=0.3.28
-- libpng=1.6.44
+- libpng=1.6.45
 - libsanitizer=14.2.0
 - libsodium=1.0.18
 - libsqlite=3.47.2
@@ -183,7 +184,7 @@ dependencies:
 - ptyprocess=0.7.0
 - pure_eval=0.2.3
 - pycparser=2.22
-- pygments=2.18.0
+- pygments=2.19.1
 - pyhmmer=0.10.15
 - pyjwt=2.10.1
 - pynacl=1.5.0
@@ -199,9 +200,9 @@ dependencies:
 - pytz=2024.2
 - pyyaml=6.0.2
 - pyzmq=24.0.1
-- q2-metadata=2025.4.0.dev0+4.g089741e
-- q2-mystery-stew=2025.4.0.dev0+4.g61f2014
-- q2-types=2025.4.0.dev0+4.gcd4ef91
+- q2-metadata=2025.4.0.dev0+5.g7af916f
+- q2-mystery-stew=2025.4.0.dev0+5.g51996ef
+- q2-types=2025.4.0.dev0+5.gea31a99
 - q2cli=2025.4.0.dev0+8.g63d82cb
 - q2templates=2025.4.0.dev0+5.gfcd2c55
 - qiime2=2025.4.0.dev0+11.g85975ad
