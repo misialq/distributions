@@ -4,6 +4,7 @@ channels:
 - bioconda
 dependencies:
 - biom-format=2.1.15
+- fastp=0.24.0
 - h5py=3.11.0
 - hdf5=1.14.3
 - mafft=7.526
@@ -45,6 +46,7 @@ dependencies:
 - qiime2=2025.4.0.dev0+11.g85975ad
 - r-base=4.3.3
 - r-reticulate=1.36.0
+- r-vegan=2.6_8
 - rescript=2025.4.0.dev0+7.g86836b5
 - rpy2=3.5.11
 - scikit-bio=0.6.0
