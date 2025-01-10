@@ -3,7 +3,7 @@ channels:
 - conda-forge
 - bioconda
 dependencies:
-- biom-format=2.1.16
+- biom-format=2.1.15
 - biopython=1.83
 - bowtie2=2.5.1
 - entrezpy=2.1.2
