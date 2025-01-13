@@ -375,7 +375,7 @@ dependencies:
 - pandas=2.2.2
 - pandera=0.22.1
 - pandera-base=0.22.1
-- pandoc=3.6.1
+- pandoc=3.6.2
 - pandocfilters=1.5.0
 - pango=1.54.0
 - parameterized=0.9.0
@@ -692,7 +692,7 @@ dependencies:
 - r-rappdirs=0.3.3
 - r-rbibutils=2.3
 - r-rcolorbrewer=1.1_3
-- r-rcpp=1.0.13_1
+- r-rcpp=1.0.14
 - r-rcppannoy=0.0.22
 - r-rcppeigen=0.3.4.0.2
 - r-rcpphnsw=0.6.0
@@ -857,7 +857,7 @@ dependencies:
 - wget=1.21.4
 - wheel=0.45.1
 - widgetsnbextension=4.0.13
-- wrapt=1.17.0
+- wrapt=1.17.1
 - xcb-util=0.4.0
 - xcb-util-image=0.4.0
 - xcb-util-keysyms=0.4.0
