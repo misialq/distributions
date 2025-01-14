@@ -79,7 +79,7 @@ packages:
   repo: qiime2/q2-metadata
   distros: [tiny, amplicon, moshpit]
 
-- name: q2-moshpit
+- name: q2-annotate
   repo: bokulich-lab/q2-moshpit
   distros: [moshpit]
 
